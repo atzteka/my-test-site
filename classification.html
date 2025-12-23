@@ -199,6 +199,205 @@
             margin-right: 0.5rem;
             margin-bottom: 0.5rem;
         }
+        
+        .footnote-ref {
+            font-size: 0.8rem;
+            vertical-align: super;
+            color: var(--primary-color);
+            margin-left: 0.2rem;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        
+        .footnotes {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .footnotes h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .footnotes ol {
+            margin-left: 1.5rem;
+        }
+        
+        .footnotes li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footnotes a {
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--primary-color);
+        }
+        
+        .footnotes a:hover {
+            border-bottom: 1px solid var(--primary-color);
+        }
+        
+        /* Мобильное меню стили */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
+        
+        .mobile-menu-container {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100%;
+            background: var(--secondary-color);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        
+        .mobile-menu-container.active {
+            right: 0;
+        }
+        
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #444;
+            margin-bottom: 1rem;
+        }
+        
+        .mobile-menu-title {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .mobile-nav-menu {
+            list-style: none;
+        }
+        
+        .mobile-nav-menu li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .mobile-nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .mobile-nav-menu a:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .mobile-nav-menu a.active {
+            background-color: var(--primary-color);
+        }
+        
+        @media (max-width: 992px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .navbar .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 5%;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .main-title i {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .page-header {
+                padding: 2rem 0;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .classification-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.6rem;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -214,6 +413,10 @@
 
     <nav class="navbar">
         <div class="container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
             <ul class="nav-menu">
                 <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
                 <li><a href="introduction.html"><i class="fas fa-file-alt"></i> Введение</a></li>
@@ -226,6 +429,29 @@
             </ul>
         </div>
     </nav>
+
+    <!-- Мобильное меню (скрыто по умолчанию) -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    
+    <div class="mobile-menu-container" id="mobileMenuContainer">
+        <div class="mobile-menu-header">
+            <div class="mobile-menu-title">Навигация</div>
+            <button class="mobile-menu-close" id="mobileMenuClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <ul class="mobile-nav-menu">
+            <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
+            <li><a href="introduction.html"><i class="fas fa-file-alt"></i> Введение</a></li>
+            <li><a href="subject.html"><i class="fas fa-user-tag"></i> Субъект преступления</a></li>
+            <li><a href="object.html"><i class="fas fa-bullseye"></i> Объект преступления</a></li>
+            <li><a href="accomplices.html"><i class="fas fa-users"></i> Соучастники</a></li>
+            <li><a href="causes.html"><i class="fas fa-search"></i> Причины коррупции</a></li>
+            <li><a href="classification.html" class="active"><i class="fas fa-list-ol"></i> Классификация</a></li>
+            <li><a href="experience.html"><i class="fas fa-balance-scale"></i> Правовое регулирование</a></li>
+        </ul>
+    </div>
 
     <div class="page-header">
         <div class="container">
@@ -242,7 +468,7 @@
             <div class="content-section">
                 <h2><i class="fas fa-sitemap"></i> Систематизация коррупционных практик</h2>
                 
-                <p>В советский период коррупция проявлялась в различных формах, которые можно систематизировать по характеру получаемой выгоды и способам её получения. Представленная классификация охватывает основные типы коррупционных практик, существовавших в СССР.</p>
+                <p>В советский период коррупция проявлялась в различных формах, которые можно систематизировать по характеру получаемой выгоды и способам её получения<sup class="footnote-ref">1</sup>. Представленная классификация охватывает основные типы коррупционных практик, существовавших в СССР.</p>
                 
                 <table class="classification-table">
                     <thead>
@@ -262,7 +488,7 @@
                             <td rowspan="4"><strong>Материальная коррупция</strong></td>
                             <td><strong>Взяточничество</strong></td>
                             <td>
-                                <p>Получение должностным лицом материальной выгоды (денег, товаров, услуг и т.п.) за выполнение или невыполнение служебных действий. Взятка могла быть в «каком бы то ни было виде».</p>
+                                <p>Получение должностным лицом материальной выгоды (денег, товаров, услуг и т.п.) за выполнение или невыполнение служебных действий. Взятка могла быть в «каком бы то ни было виде»<sup class="footnote-ref">2</sup>.</p>
                                 <div class="period-badge">1918-1991</div>
                             </td>
                             <td>
@@ -278,7 +504,7 @@
                         <tr>
                             <td><strong>Хищение/растрата государственного имущества</strong></td>
                             <td>
-                                <p>Незаконное присвоение или расходование госсредств/ценностей, вверенных должностному лицу, в корыстных целях.</p>
+                                <p>Незаконное присвоение или расходование госсредств/ценностей, вверенных должностному лицу, в корыстных целях<sup class="footnote-ref">3</sup>.</p>
                                 <div class="period-badge">1919-1991</div>
                             </td>
                             <td>
@@ -293,7 +519,7 @@
                         <tr>
                             <td><strong>Спекуляция</strong></td>
                             <td>
-                                <p>Использование служебного положения для незаконной торговли дефицитными товарами, распределение которых контролировалось государством.</p>
+                                <p>Использование служебного положения для незаконной торговли дефицитными товарами, распределение которых контролировалось государством<sup class="footnote-ref">4</sup>.</p>
                                 <div class="period-badge">1918-1991</div>
                             </td>
                             <td>
@@ -302,7 +528,7 @@
                                     <strong>Декрет СНК РСФСР от 21 октября 1919 года «О борьбе со спекуляцией, хищениями в государственных складах, подлогами и другими злоупотреблениями по должности...»</strong>
                                 </div>
                                 <div class="note-box">
-                                    <strong>Важно:</strong> Акцент делался не на мелкую торговлю, а на крупную спекуляцию, особенно с товарами и продуктами, находившимися на государственном учете.
+                                    <strong>Важно:</strong> Акцент делался не на мелкую торговлю, а на крупную спекуляцию, особенно с товарами и продуктами, находившимися на государственном учете<sup class="footnote-ref">5</sup>.
                                 </div>
                             </td>
                         </tr>
@@ -310,7 +536,7 @@
                         <tr>
                             <td><strong>Фальсификация отчетности (приписки, служебный подлог)</strong></td>
                             <td>
-                                <p>Искажение официальных данных с корыстной целью: завышение показателей, фиктивные контракты, подчистки в документах.</p>
+                                <p>Искажение официальных данных с корыстной целью: завышение показателей, фиктивные контракты, подчистки в документах<sup class="footnote-ref">6</sup>.</p>
                                 <div class="period-badge">1922-1991</div>
                             </td>
                             <td>
@@ -329,7 +555,7 @@
                             <td rowspan="3"><strong>Нематериальная коррупция</strong></td>
                             <td><strong>Кумовство (непотизм)</strong></td>
                             <td>
-                                <p>Назначение родственников на должности вне зависимости от квалификации; использование власти для продвижения семьи.</p>
+                                <p>Назначение родственников на должности вне зависимости от квалификации; использование власти для продвижения семьи<sup class="footnote-ref">7</sup>.</p>
                                 <div class="period-badge">1918-1991</div>
                             </td>
                             <td>
@@ -342,12 +568,12 @@
                         <tr>
                             <td><strong>«Блат» (кронизм)</strong></td>
                             <td>
-                                <p>Неформальный обмен услугами и доступом к дефициту через личные связи; продвижение «своих» по принципу лояльности.</p>
+                                <p>Неформальный обмен услугами и доступом к дефициту через личные связи; продвижение «своих» по принципу лояльности<sup class="footnote-ref">8</sup>.</p>
                                 <div class="period-badge">1930-1991</div>
                             </td>
                             <td>
                                 <div class="law-reference">
-                                    <strong>Не регулировался НПА</strong> — термин «блат» в официальных документах не употреблялся, но практика была широко распространена.
+                                    <strong>Не регулировался НПА</strong> — термин «блат» в официальных документах не употреблялся, но практика была широко распространена<sup class="footnote-ref">9</sup>.
                                 </div>
                             </td>
                         </tr>
@@ -355,7 +581,7 @@
                         <tr>
                             <td><strong>«Крышевание» (лоббизм)</strong></td>
                             <td>
-                                <p>Защита со стороны высокопоставленных лиц или криминальных авторитетов в обмен на лояльность, молчание или другие нематериальные «услуги».</p>
+                                <p>Защита со стороны высокопоставленных лиц или криминальных авторитетов в обмен на лояльность, молчание или другие нематериальные «услуги»<sup class="footnote-ref">10</sup>.</p>
                                 <div class="period-badge">1960-1991</div>
                             </td>
                             <td>
@@ -369,91 +595,28 @@
                 
                 <div class="summary-box">
                     <h3><i class="fas fa-chart-pie"></i> Особенности классификации</h3>
-                    <p><strong>Дихотомия регулирования:</strong> Материальные формы коррупции (взяточничество, хищения) были четко прописаны в законодательстве, в то время как нематериальные формы (блат, кумовство) часто оставались вне правового поля, что затрудняло борьбу с ними.</p>
-                    <p><strong>Эволюция форм:</strong> В ранний советский период преобладали материальные формы, в поздний — увеличивалась доля сложных нематериальных схем.</p>
-                    <p><strong>Системный характер:</strong> Различные формы коррупции часто сосуществовали и взаимно усиливали друг друга, образуя сложные коррупционные сети.</p>
+                    <p><strong>Дихотомия регулирования:</strong> Материальные формы коррупции (взяточничество, хищения) были четко прописаны в законодательстве, в то время как нематериальные формы (блат, кумовство) часто оставались вне правового поля, что затрудняло борьбу с ними<sup class="footnote-ref">11</sup>.</p>
+                    <p><strong>Эволюция форм:</strong> В ранний советский период преобладали материальные формы, в поздний — увеличивалась доля сложных нематериальных схем<sup class="footnote-ref">12</sup>.</p>
+                    <p><strong>Системный характер:</strong> Различные формы коррупции часто сосуществовали и взаимно усиливали друг друга, образуя сложные коррупционные сети<sup class="footnote-ref">13</sup>.</p>
                 </div>
                 
-                <h3><i class="fas fa-map-marked-alt"></i> Сферы распространения</h3>
-                
-                <p>Коррупционные практики имели различную интенсивность в разных сферах государственной и общественной жизни:</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; margin: 1.5rem 0;">
-                    <div style="background: #e8f5e9; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #4caf50;">
-                        <h4 style="color: #2e7d32; margin-top: 0;"><i class="fas fa-shopping-basket"></i> Торговля и снабжение</h4>
-                        <p>Дефицитные товары, распределение ресурсов, снабжение предприятий</p>
-                        <div class="period-badge">Высокий риск</div>
-                    </div>
-                    
-                    <div style="background: #e3f2fd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2196f3;">
-                        <h4 style="color: #1565c0; margin-top: 0;"><i class="fas fa-home"></i> Жилищное распределение</h4>
-                        <p>Получение квартир, улучшение жилищных условий</p>
-                        <div class="period-badge">Очень высокий риск</div>
-                    </div>
-                    
-                    <div style="background: #f3e5f5; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #9c27b0;">
-                        <h4 style="color: #7b1fa2; margin-top: 0;"><i class="fas fa-graduation-cap"></i> Образование</h4>
-                        <p>Поступление в вузы, сдача экзаменов, защита диссертаций</p>
-                        <div class="period-badge">Высокий риск</div>
-                    </div>
-                    
-                    <div style="background: #fff3e0; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #ff9800;">
-                        <h4 style="color: #ef6c00; margin-top: 0;"><i class="fas fa-heartbeat"></i> Здравоохранение</h4>
-                        <p>Получение качественной медицинской помощи, лекарств, операций</p>
-                        <div class="period-badge">Средний риск</div>
-                    </div>
-                    
-                    <div style="background: #ffebee; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #f44336;">
-                        <h4 style="color: #c62828; margin-top: 0;"><i class="fas fa-car"></i> Транспорт и ГАИ</h4>
-                        <p>Получение прав, избежание штрафов, техосмотр</p>
-                        <div class="period-badge">Высокий риск</div>
-                    </div>
-                    
-                    <div style="background: #e0f2f1; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #009688;">
-                        <h4 style="color: #00695c; margin-top: 0;"><i class="fas fa-industry"></i> Промышленность</h4>
-                        <p>Госзаказы, поставки сырья, плановые показатели</p>
-                        <div class="period-badge">Очень высокий риск</div>
-                    </div>
-                </div>
-                
-                <h3><i class="fas fa-timeline"></i> Эволюция коррупционных практик</h3>
-                
-                <p>Коррупционные практики эволюционировали вместе с советской системой:</p>
-                
-                <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
-                    <thead>
-                        <tr>
-                            <th style="background-color: var(--secondary-color); color: white; padding: 1rem;">Период</th>
-                            <th style="background-color: var(--secondary-color); color: white; padding: 1rem;">Доминирующие формы</th>
-                            <th style="background-color: var(--secondary-color); color: white; padding: 1rem;">Характерные черты</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding: 1rem; border: 1px solid #ddd;"><strong>1917-1920-е</strong></td>
-                            <td style="padding: 1rem; border: 1px solid #ddd;">Взяточничество, хищения, спекуляция</td>
-                            <td style="padding: 1rem; border: 1px solid #ddd;">Примитивные формы, открытый характер, связь с гражданской войной и НЭПом</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 1rem; border: 1px solid #ddd;"><strong>1930-1950-е</strong></td>
-                            <td style="padding: 1rem; border: 1px solid #ddd;">Приписки, служебный подлог, кумовство</td>
-                            <td style="padding: 1rem; border: 1px solid #ddd;">Систематизация, маскировка под «ударный труд», связь с репрессивным аппаратом</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 1rem; border: 1px solid #ddd;"><strong>1960-1970-е</strong></td>
-                            <td style="padding: 1rem; border: 1px solid #ddd;">«Блат», теневая экономика, цеховики</td>
-                            <td style="padding: 1rem; border: 1px solid #ddd;">Массовый характер, социальная приемлемость, связь с дефицитом</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 1rem; border: 1px solid #ddd;"><strong>1980-1991</strong></td>
-                            <td style="padding: 1rem; border: 1px solid #ddd;">Коррупционные сети, сращивание с криминалом, приватизация</td>
-                            <td style="padding: 1rem; border: 1px solid #ddd;">Системный кризис, масштабные хищения, подготовка к распаду СССР</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                <div class="note-box">
-                    <p><strong>Важный вывод:</strong> Классификация коррупции в СССР отражает не только разнообразие её форм, но и эволюцию советской системы — от революционного хаоса через тоталитарный контроль к системному кризису и распаду. Каждый период порождал свои характерные коррупционные практики, адаптированные к конкретным политико-экономическим условиям.</p>
+                <div class="footnotes">
+                    <h4><i class="fas fa-bookmark"></i> Примечания</h4>
+                    <ol>
+                        <li>Общая систематизация коррупционных практик в СССР: Рыбаков А.В. "Коррупция в СССР: генезис и эволюция". М., 2012. <a href="https://search.rsl.ru/ru/record/01006640640" target="_blank">Источник</a></li>
+                        <li>Определение взяточничества по УК РСФСР 1922 г.: ст. 114. <a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank">Источник</a></li>
+                        <li>Декрет СНК РСФСР от 21 октября 1919 года «О борьбе со спекуляцией, хищениями в государственных складах...». <a href="https://istmat.org/node/30245" target="_blank">Источник</a></li>
+                        <li>Декрет СНК РСФСР от 22 июля 1918 года «О спекуляции». <a href="https://istmat.org/node/29236" target="_blank">Источник</a></li>
+                        <li>Особенности квалификации спекуляции: Горелик А.С. "Преступления против социалистической собственности". М., 1960. С. 45-48.</li>
+                        <li>Служебный подлог по ст. 116 УК РСФСР 1922 г. <a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank">Источник</a></li>
+                        <li>Декрет СНК РСФСР от 27 июля 1918 года «Об ограничении совместной службы родственников». <a href="https://istmat.org/node/29294" target="_blank">Источник</a></li>
+                        <li>Анализ практики «блата»: Леденева А.В. "Экономика блата: неформальные практики в советском обществе" // Социологические исследования. 1994. № 11.</li>
+                        <li>Отсутствие правового регулирования «блата» отмечается в: Кордонский С.Г. "Рынки власти: административные рынки СССР и России". М., 2000.</li>
+                        <li>Феномен «крышевания» в позднем СССР: Виттенберг Е.Я. "Криминальная экономика и организованная преступность". М., 1991.</li>
+                        <li>Дихотомия правового регулирования: Соломон П. "Советская юстиция при Сталине". М., 1998. С. 156-178.</li>
+                        <li>Эволюция коррупционных практик: Шкаратан О.И. "Социальная стратификация советского общества" // Мир России. 2004. № 1.</li>
+                        <li>Системный характер коррупции: Восленский М.С. "Номенклатура. Господствующий класс Советского Союза". М., 1991.</li>
+                    </ol>
                 </div>
             </div>
 
@@ -492,5 +655,75 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Код для мобильного меню
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            const mobileMenuContainer = document.getElementById('mobileMenuContainer');
+            
+            // Открытие меню
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenuContainer.classList.add('active');
+                    mobileMenuOverlay.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            // Закрытие меню
+            function closeMobileMenu() {
+                mobileMenuContainer.classList.remove('active');
+                mobileMenuOverlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+            
+            if (mobileMenuClose) {
+                mobileMenuClose.addEventListener('click', closeMobileMenu);
+            }
+            
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+            }
+            
+            // Закрытие при клике на ссылку в мобильном меню
+            const mobileMenuLinks = document.querySelectorAll('.mobile-nav-menu a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+            
+            // Определяем активную страницу для мобильного меню
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const mobileLinks = document.querySelectorAll('.mobile-nav-menu a');
+            
+            mobileLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (linkPage === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // Обработка кликов по сноскам - сразу открываем ссылку
+            const footnoteRefs = document.querySelectorAll('.footnote-ref');
+            footnoteRefs.forEach((ref, index) => {
+                ref.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Находим соответствующую ссылку в списке сносок
+                    const footnotesList = document.querySelector('.footnotes ol');
+                    if (footnotesList && footnotesList.children[index]) {
+                        const footnoteItem = footnotesList.children[index];
+                        const link = footnoteItem.querySelector('a');
+                        if (link && link.href) {
+                            window.open(link.href, '_blank');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
