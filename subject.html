@@ -145,6 +145,141 @@
             border-bottom: none;
             margin-top: 0;
         }
+        
+        /* Стили для мобильного меню */
+        .burger-menu {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            padding: 10px;
+            z-index: 1001;
+        }
+        
+        /* Адаптивные стили */
+        @media (max-width: 992px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 0.7rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .burger-menu {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 15px;
+            }
+            
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                padding: 0;
+                z-index: 1000;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-menu li {
+                width: 100%;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .nav-menu li:last-child {
+                border-bottom: none;
+            }
+            
+            .nav-menu a {
+                display: block;
+                padding: 15px 20px;
+                color: white;
+                text-decoration: none;
+                transition: background-color 0.3s;
+            }
+            
+            .nav-menu a:hover,
+            .nav-menu a.active {
+                background-color: #9a0007;
+            }
+            
+            .navbar {
+                position: relative;
+                padding: 0;
+            }
+            
+            .navbar .container {
+                padding: 0;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .content-section {
+                padding: 1.2rem;
+                border-radius: 8px;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .year-badge {
+                display: block;
+                margin-bottom: 0.5rem;
+                margin-right: 0;
+            }
+            
+            td:first-child,
+            th:first-child {
+                position: sticky;
+                left: 0;
+                background-color: #f9f9f9;
+                z-index: 1;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.5rem;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -160,7 +295,10 @@
 
     <nav class="navbar">
         <div class="container">
-            <ul class="nav-menu">
+            <button class="burger-menu" id="burgerMenu" aria-label="Меню">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
                 <li><a href="introduction.html"><i class="fas fa-file-alt"></i> Введение</a></li>
                 <li><a href="subject.html" class="active"><i class="fas fa-user-tag"></i> Субъект преступления</a></li>
@@ -307,60 +445,37 @@
             </div>
         </div>
     </footer>
-        <script>
+
+    <script>
+        // Бургер-меню
         document.addEventListener('DOMContentLoaded', function() {
-            // Код для мобильного меню
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mobileMenuClose = document.getElementById('mobileMenuClose');
-            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-            const mobileMenuContainer = document.getElementById('mobileMenuContainer');
+            const burgerMenu = document.getElementById('burgerMenu');
+            const navMenu = document.getElementById('navMenu');
             
-            // Открытие меню
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    mobileMenuContainer.classList.add('active');
-                    mobileMenuOverlay.style.display = 'block';
-                    document.body.style.overflow = 'hidden';
-                });
-            }
-            
-            // Закрытие меню
-            function closeMobileMenu() {
-                mobileMenuContainer.classList.remove('active');
-                mobileMenuOverlay.style.display = 'none';
-                document.body.style.overflow = '';
-            }
-            
-            if (mobileMenuClose) {
-                mobileMenuClose.addEventListener('click', closeMobileMenu);
-            }
-            
-            if (mobileMenuOverlay) {
-                mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-            }
-            
-            // Закрытие при клике на ссылку в мобильном меню
-            const mobileMenuLinks = document.querySelectorAll('.mobile-nav-menu a');
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', closeMobileMenu);
+            burgerMenu.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                burgerMenu.innerHTML = navMenu.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
             });
             
-            // Определяем активную страницу для мобильного меню
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            const mobileLinks = document.querySelectorAll('.mobile-nav-menu a');
+            // Закрыть меню при клике на ссылку
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    burgerMenu.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
             
-            mobileLinks.forEach(link => {
-                const linkPage = link.getAttribute('href');
-                if (linkPage === currentPage) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
+            // Закрыть меню при клике вне его области
+            document.addEventListener('click', function(event) {
+                if (!navMenu.contains(event.target) && !burgerMenu.contains(event.target)) {
+                    navMenu.classList.remove('active');
+                    burgerMenu.innerHTML = '<i class="fas fa-bars"></i>';
                 }
             });
         });
     </script>
 </body>
 </html>
-</body>
-</html>
-
