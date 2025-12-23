@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правовое регулирование - Советская Россия</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            background: linear-gradient(rgba(33, 33, 33, 0.9), rgba(33, 33, 33, 0.95)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect width="100" height="100" fill="%23212121"/><path d="M0,20 Q50,0 100,20 L100,80 Q50,100 0,80 Z" fill="%23b71c1c" opacity="0.3"/></svg>');
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title {
+            font-family: 'Roboto Slab', serif;
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .content-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid #eee;
+            font-family: 'Roboto Slab', serif;
+        }
+        
+        .content-section h3 {
+            color: var(--secondary-color);
+            margin: 2rem 0 1.2rem;
+            font-family: 'Roboto Slab', serif;
+            padding-left: 1rem;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .content-section h4 {
+            color: #555;
+            margin: 1.5rem 0 0.8rem;
+            font-size: 1.1rem;
+        }
+        
+        .content-section p {
+            margin-bottom: 1.2rem;
+        }
+        
+        .content-section ul {
+            margin: 1rem 0 1.5rem 2rem;
+        }
+        
+        .content-section li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .law-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .law-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            padding: 1.2rem;
+            text-align: left;
+            font-family: 'Roboto Slab', serif;
+            font-size: 1rem;
+        }
+        
+        .law-table td {
+            padding: 1.2rem;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        .law-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .law-table tr:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .law-reference {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .law-reference a {
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--primary-color);
+        }
+        
+        .law-reference a:hover {
+            border-bottom: 1px solid var(--primary-color);
+        }
+        
+        .period-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .period-table th {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .period-table td {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        .agency-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .agency-table th {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .agency-table td {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        .propaganda-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .propaganda-table th {
+            background-color: #8e44ad;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .propaganda-table td {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        .punishment-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .punishment-table th {
+            background-color: #c0392b;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .punishment-table td {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(to right, #f8f9fa, #fff);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .year-badge {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-btn:hover {
+            background: #9a0007;
+            transform: translateX(-5px);
+        }
+        
+        .nav-btn.next:hover {
+            transform: translateX(5px);
+        }
+        
+        .nav-btn.next {
+            margin-left: auto;
+        }
+        
+        .note-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ff9800;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+            font-size: 0.9rem;
+        }
+        
+        .note-box strong {
+            color: #e65100;
+        }
+        
+        .section-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .section-box h3 {
+            border-left: none;
+            padding-left: 0;
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="main-title">
+                <i class="fas fa-landmark"></i>
+                СОВЕТСКАЯ РОССИЯ
+            </h1>
+            <p class="subtitle">Исследование коррупционных преступлений в советский период</p>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
+                <li><a href="introduction.html"><i class="fas fa-file-alt"></i> Введение</a></li>
+                <li><a href="subject.html"><i class="fas fa-user-tag"></i> Субъект преступления</a></li>
+                <li><a href="object.html"><i class="fas fa-bullseye"></i> Объект преступления</a></li>
+                <li><a href="accomplices.html"><i class="fas fa-users"></i> Соучастники</a></li>
+                <li><a href="causes.html"><i class="fas fa-search"></i> Причины коррупции</a></li>
+                <li><a href="classification.html"><i class="fas fa-list-ol"></i> Классификация</a></li>
+                <li><a href="experience.html" class="active"><i class="fas fa-balance-scale"></i> Правовое регулирование</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">
+                <i class="fas fa-balance-scale"></i>
+                Опыт правового регулирования противодействия коррупции
+            </h1>
+            <p>1917-1991 гг. - меры, институты и эффективность борьбы</p>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="content-section">
+                <h2><i class="fas fa-shield-alt"></i> Комплексный подход к противодействию коррупции</h2>
+                
+                <p>Советское государство применяло многоуровневую систему мер противодействия коррупции, включающую профилактические меры, законодательное регулирование, создание специальных органов, идеологическую пропаганду и карательные меры.</p>
+                
+                <div class="section-box">
+                    <h3><i class="fas fa-clipboard-check"></i> 1. Профилактические меры</h3>
+                    
+                    <table class="period-table">
+                        <thead>
+                            <tr>
+                                <th width="25%">Мера</th>
+                                <th width="75%">Описание</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Открытость судебных процессов</strong></td>
+                                <td>
+                                    <p>В годы НЭПа народным судам вменялось в обязанность заранее публиковать в прессе точные даты и время рассмотрения дел о взяточничестве. Открытость должна была оказывать психологическое давление и формировать убеждение в неизбежности наказания.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Гражданское осведомительство и премии</strong></td>
+                                <td>
+                                    <p>В сентябре 1922 года при Совете труда и обороны создали межведомственную комиссию по борьбе со взяточничеством. 4 октября 1922 года СТО утвердил постановление о денежных премиях для граждан, сообщивших о коррупции. Источником финансирования являлись проценты от стоимости конфискованного имущества.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Временные правила о службе в государственных учреждениях и предприятиях</strong></td>
+                                <td>
+                                    <p><span class="year-badge">1922</span> Декрет СНК РСФСР от 21 декабря 1922 года запрещал госслужащим:<sup><a href="#ref4">[4]</a></sup></p>
+                                    <ul>
+                                        <li>участвовать в частных предприятиях,</li>
+                                        <li>вступать в коммерческие отношения с госструктурами,</li>
+                                        <li>совмещать работу,</li>
+                                        <li>быть акционерами частных компаний.</li>
+                                    </ul>
+                                    <p>Нарушение влекло уголовную ответственность по ст. 114 УК РСФСР 1922 г.<sup><a href="#ref5">[5]</a></sup></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Запрет авансирования подрядов</strong></td>
+                                <td>
+                                    <p>В 1923 году введен запрет предварительного авансирования работ по контрактам. РКИ получила право инициировать гражданский иск и применять дисциплинарные санкции.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Конкурсный отбор подрядчиков</strong></td>
+                                <td>
+                                    <p>Для обеспечения честности и прозрачности госзакупок вводился обязательный конкурсный отбор на основе сравнения цен, технических параметров и условий.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Расширенный анкетный лист</strong></td>
+                                <td>
+                                    <p>С 1924 года государственные служащие обязаны были указывать: личное имущественное положение, изменения в статусе родственников, родственные связи в учреждении, работы по совместительству.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Позитивные стимулы</strong></td>
+                                <td>
+                                    <p>Улучшение жилищных условий, снабжения и уровня жизни служащих рассматривалось как способ профилактики коррупции.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ящики для жалоб</strong></td>
+                                <td>
+                                    <p>Введены специальные ящики для анонимных сообщений о взяточничестве. Однако население отнеслось с недоверием.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Освобождение от гербового сбора</strong></td>
+                                <td>
+                                    <p>Жалобы и документы по коррупционным делам не облагались гербовым сбором, что упрощало доступ к правосудию для малоимущих.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="section-box">
+                    <h3><i class="fas fa-gavel"></i> 2. Антикоррупционное законодательство</h3>
+                    
+                    <table class="law-table">
+                        <thead>
+                            <tr>
+                                <th width="20%">НПА</th>
+                                <th width="40%">Содержание и наказание</th>
+                                <th width="40%">Эволюция</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="year-badge">1917</span><br><strong>Декрет от 10 ноября 1917 г. «Об уничтожении сословий и гражданских чинов»</strong><sup><a href="#ref6">[6]</a></sup></td>
+                                <td>Отменены сословия, чины, титулы и привилегии, разрушена система продажи должностей.</td>
+                                <td>Первый шаг по ликвидации исторических корней коррупции.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="year-badge">1917</span><br><strong>Декрет от 14 ноября 1917 г. «О рабочем контроле»</strong><sup><a href="#ref7">[7]</a></sup></td>
+                                <td>
+                                    <p>Ст. 7: предприниматели обязаны открывать всю документацию перед рабочими, ликвидируется коммерческая тайна.</p>
+                                    <p>Ст. 10: уголовная ответственность за сокрытие продукции, растраты, хищения, мошенничество. Конкретные санкции не указаны.</p>
+                                </td>
+                                <td>Закладывает основу прозрачности и уголовной ответственности.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="year-badge">1917</span><br><strong>Постановление НКЮ РСФСР от 19 декабря 1917 г. «О революционном трибунале»</strong><sup><a href="#ref8">[8]</a></sup></td>
+                                <td>Уголовная ответственность за злоупотребление полномочиями, предоставленными «революционным народом». Наказания: лишение свободы, штрафы, объявление врагом народа, лишение прав, конфискация, принудительные работы.</td>
+                                <td>Расширение ответственности за бюрократизм и волокиту.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="year-badge">1918</span><br><strong>Декрет СНК РСФСР от 8 мая 1918 г. «О взяточничестве»</strong><sup><a href="#ref9">[9]</a></sup></td>
+                                <td>Минимум — 5 лет тюремного заключения + 5 лет принудительных работ. Все участники (взяткодатели, посредники и др.) — равная ответственность. При отягчающих — конфискация имущества и «неприятные» работы для «имущих классов».</td>
+                                <td>Впервые введен минимальный срок. Указан классовый подход.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="year-badge">1921</span><br><strong>Декрет от 16 августа 1921 г. «О борьбе со взяточничеством»</strong><sup><a href="#ref10">[10]</a></sup></td>
+                                <td>Сохранены санкции 1918 г., но: взяткодатели освобождались при сотрудничестве; посредничество и укрывательство — самостоятельные преступления.</td>
+                                <td>Смягчение наказания для взяткодателей, расширение состава преступлений.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="year-badge">1922</span><br><strong>Уголовный кодекс РСФСР 1922 г.</strong><sup><a href="#ref11">[11]</a></sup></td>
+                                <td>Ст. 114: до 5 лет лишения свободы за простое взяточничество; при отягчающих — от 3 лет до расстрела + конфискация. Посредники — до 2 лет. Ст. 115: провокация взятки — от 3 лет или расстрел.</td>
+                                <td>Создана дифференцированная система ответственности по критерию корысти и ущерба.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="year-badge">1922</span><br><strong>Декрет ВЦИК и СНК. Об изменении текста ст. 114 Уголовного Кодекса от 9 декабря 1922 г.</strong><sup><a href="#ref12">[12]</a></sup></td>
+                                <td>Изменение ст. 114 УК: минимум — 1 год лишения свободы (без права смягчения), добавлен квалифицирующий признак — нанесение ущерба государству.</td>
+                                <td>Ужесточение: введение обязательного минимума.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="year-badge">1926</span><br><strong>Уголовный кодекс РСФСР 1926 г.</strong><sup><a href="#ref13">[13]</a></sup></td>
+                                <td>
+                                    <p>Ст. 116 (растрата): до 3 лет (ранее — до 5); при отягчающих — от 2 лет + конфискация.</p>
+                                    <p>Ст. 117 (получение взятки): до 2 лет; при отягчающих — от 2 лет + конфискация.</p>
+                                    <p>Ст. 118 (дача взятки): до 3 лет.</p>
+                                    <p>Ст. 119 (провокация): до 2 лет (вместо расстрела).</p>
+                                </td>
+                                <td>Общее смягчение санкций, но усиление ответственности за групповые и должностные преступления.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="year-badge">1940-е</span><br><strong>Военное время</strong></td>
+                                <td>
+                                    <p><strong>Закон СССР от 7 августа 1932 года «Об охране имущества государственных предприятий, колхозов и кооперации и управлении общественной (социалистической) собственности»</strong> (в народе — «закон о пяти колосках»)<sup><a href="#ref14">[14]</a></sup>: хищение соцсобственности — до расстрела или 10 лет.</p>
+                                    <p><strong>Постановление ГКО от 22 января 1943 года:</strong> расследование — в 10 дней, смертная казнь.</p>
+                                    <p><strong>Указ от 23 июня 1942 года:</strong> хищение горючего — 3-5 лет.</p>
+                                    <p><strong>Постановление от 11 июля 1942 года:</strong> ответственность за саботаж и спекуляцию — до 10 лет.</p>
+                                </td>
+                                <td>Максимальное ужесточение в условиях войны.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="year-badge">1960</span><br><strong>УК РСФСР 1960 г. + Указ от 20 февраля 1962 года</strong><sup><a href="#ref15">[15]</a></sup><sup><a href="#ref16">[16]</a></sup></td>
+                                <td>
+                                    <p>Ст. 173: получение взятки — до 5 лет (основное), до 10 лет с конфискацией (отягчающие).</p>
+                                    <p>Указ 1962 г.: введена ч. 3 — от 8 до 15 лет + ссылка, при особо отягчающих — смертная казнь.</p>
+                                    <p>Ст. 174: дача взятки — до 3 лет, с освобождением при явке с повинной.</p>
+                                </td>
+                                <td>Взяточничество признано особо опасным преступлением.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="year-badge">1986</span><br><strong>Указ от 23 мая 1986 года</strong><sup><a href="#ref17">[17]</a></sup></td>
+                                <td>
+                                    <p>Ст. 173: базовое — до 10 лет; при отягчающих — 5-15 лет; при особо отягчающих — 8-15 лет + ссылка или смертная казнь.</p>
+                                    <p>Ст. 174: дача — от 3 до 8 лет, при рецидиве — до 15 лет.</p>
+                                    <p>Введена ст. 173.1 — посредничество (2-15 лет).</p>
+                                </td>
+                                <td>Максимальное ужесточение ответственности, введение отдельной статьи о посредничестве.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="section-box">
+                    <h3><i class="fas fa-building"></i> 3. Органы по борьбе с коррупцией</h3>
+                    
+                    <table class="agency-table">
+                        <thead>
+                            <tr>
+                                <th width="25%">Орган / Структура</th>
+                                <th width="50%">Функции и особенности</th>
+                                <th width="25%">Время создания / НПА</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Следственно-юридическая комиссия ВЦИК I созыва</strong></td>
+                                <td>Расследование коррупции в военно-фронтовой сфере (подкуп, оборот оружия).</td>
+                                <td>1917-1918 гг.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Центральная комиссия по борьбе со взяточничеством при ВЦИК и СНК</strong></td>
+                                <td>Разработка НПА, контроль за исполнением, статистика, проверки госаппарата, аресты. Взаимодействие с милицией, прокуратурой, РКИ, ГПУ.</td>
+                                <td>Начало 1920-х гг.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Отделы по борьбе с коррупцией в милиции (НКВД)</strong></td>
+                                <td>Общественный контроль через ящики, личная ответственность начальников, профилактика и репрессии.</td>
+                                <td>1920-е гг.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Рабоче-крестьянская инспекция (РКИ)</strong></td>
+                                <td>Общий контроль, выявление злоупотреблений, ревизии, гражданские иски, дисциплинарные взыскания, инициация уголовных дел.</td>
+                                <td>Декрет ВЦИК от 7 февраля 1920 г.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Комиссия советского контроля при СНК</strong></td>
+                                <td>Ревизии, выявление коррупции в промышленности и сельском хозяйстве.</td>
+                                <td>Постановление ЦИК и СНК СССР от 11 февраля 1934 г.; 1940 г. — реорганизация.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Комиссия советского контроля Совета Министров СССР</strong></td>
+                                <td>Ревизии и взыскания, борьба с коррупцией в торговле и снабжении.</td>
+                                <td>Постановление ЦК КПСС от 23 августа 1957 г.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ВЧК (с 1918 г.)</strong></td>
+                                <td>Выявление и пресечение взяточничества, спекуляции, хищений. Внесудебные аресты, обыски, конфискации, расстрелы.</td>
+                                <td>Декрет СНК РСФСР от 7(20) декабря 1917 г.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ГПУ</strong></td>
+                                <td>Унаследовал функции ВЧК, но с передачей дел в суд. Участие в операциях по выявлению взяточничества.</td>
+                                <td>Постановление ВЦИК от 6 февраля 1922 г.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ОБХСС</strong></td>
+                                <td>Борьба с хищениями в госторговле, заготовках, кооперации, спекуляцией.</td>
+                                <td>Приказ НКВД СССР от 16 марта 1937 г.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Комиссия по борьбе со взяточничеством (прокуратура, минюст, милиция)</strong></td>
+                                <td>Разработка планов, информационно-аналитическая работа, общественный контроль, изменение законодательства.</td>
+                                <td>1947 г.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Комиссия при СТО (сентябрь 1922 г.)</strong></td>
+                                <td>Координация борьбы с коррупцией как экономической угрозы. Создание ведомственных комиссий (НКПС, ВСНХ и др.). Ежемесячные отчеты, «вызов на ковер».</td>
+                                <td>Постановление СТО от 2 сентября 1922 г.; Положение от 15 сентября 1922 г.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="section-box">
+                    <h3><i class="fas fa-bullhorn"></i> 4. Идеологическая пропаганда</h3>
+                    
+                    <table class="propaganda-table">
+                        <thead>
+                            <tr>
+                                <th width="30%">Форма пропаганды</th>
+                                <th width="70%">Описание</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Публичные процессы</strong></td>
+                                <td>Превращались в масштабную государственную кампанию по воспитанию нетерпимости к коррупции.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Анкетный лист госслужащего (с 1924 г.)</strong></td>
+                                <td>Символизировал идеал советского чиновника; частная жизнь — предмет госинтереса; создавал ощущение постоянного контроля.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Публикации в СМИ</strong></td>
+                                <td>Раскрытие имен и фактов коррупции.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Публичное осуждение на собраниях</strong></td>
+                                <td>Распространение информации на собраниях трудколлективов, колхозных сходах, в партийных ячейках.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Сатирический образ взяточника</strong></td>
+                                <td>Использование карикатур и плакатов.<sup><a href="#ref18">[18]</a></sup></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Публикации случаев раскаяния</strong></td>
+                                <td>Включались в пропагандистскую практику.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="section-box">
+                    <h3><i class="fas fa-handcuffs"></i> 5. Карательные меры</h3>
+                    
+                    <table class="punishment-table">
+                        <thead>
+                            <tr>
+                                <th width="25%">Тип меры</th>
+                                <th width="40%">Описание</th>
+                                <th width="35%">Статистика / Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Массовые осуждения</strong></td>
+                                <td>Основной инструмент — уголовное преследование.</td>
+                                <td>
+                                    <p><strong>1937-1947 гг.:</strong> от 39 тыс. до 82 тыс. осужденных за злоупотребления; за взяточничество — от 1,5 тыс. до 5,6 тыс.</p>
+                                    <p><strong>1981-1985 гг.:</strong> рост с 1,7 тыс. до 3,0 тыс.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Смертная казнь</strong></td>
+                                <td>Специальные камеры, выездные сессии, минимум свидетелей, без защиты.</td>
+                                <td>Циркуляр НКЮ от 25.09.1922 №86 «О мерах по борьбе со взяточничеством»<sup><a href="#ref19">[19]</a></sup>.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Конфискация имущества</strong></td>
+                                <td>Экономическая репрессия; удар по материальному положению.</td>
+                                <td><strong>1978-1981 гг.:</strong> пик в 1979 г. — 762 конфискации за получение взятки, 211 — за дачу.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Административная высылка</strong></td>
+                                <td>Применялась даже при недостатке доказательств — запрет проживания в крупных городах.</td>
+                                <td>—</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Уголовная ответственность за рецидив</strong></td>
+                                <td>Ужесточение для лиц с предыдущими судимостями.</td>
+                                <td><strong>1964 г.:</strong> 463 осужденных за дачу взятки с прежней судимостью.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="highlight-box">
+                    <h4><i class="fas fa-chart-line"></i> Оценка эффективности</h4>
+                    <p><strong>Парадокс советской антикоррупционной политики:</strong> При наличии разветвленной системы мер, разнообразного законодательства и многочисленных органов борьбы с коррупцией, она продолжала существовать и даже расти в поздний советский период.</p>
+                    <p><strong>Причины ограниченной эффективности:</strong></p>
+                    <ul>
+                        <li>Селективное применение законов (ненаказуемость номенклатуры)</li>
+                        <li>Идеологическое отрицание системного характера проблемы</li>
+                        <li>Отсутствие независимых контрольных механизмов</li>
+                        <li>Системные экономические причины (дефицит, плановая экономика)</li>
+                        <li>Формальный характер многих профилактических мер</li>
+                    </ul>
+                    <p>Таким образом, советский опыт демонстрирует, что даже при наличии формально строгой системы противодействия, коррупция может сохраняться, если она порождается системными особенностями политико-экономического устройства.</p>
+                </div>
+                
+                <div class="note-box" style="margin-top: 2rem;">
+                    <h4><i class="fas fa-bookmark"></i> Примечания и источники</h4>
+                    <p id="ref4">[4] Временные правила о службе в государственных учреждениях и предприятиях: <a href="https://docs.historyrussia.org/ru/nodes/371719" target="_blank">Три страницы из документа</a></p>
+                    <p id="ref5">[5] Ст. 114 УК РСФСР 1922 г.: <a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank">https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22</a></p>
+                    <p id="ref6">[6] Декрет от 10 ноября 1917 г.: <a href="https://istmat.org/node/27959" target="_blank">https://istmat.org/node/27959</a></p>
+                    <p id="ref7">[7] Декрет от 14 ноября 1917 г.: <a href="https://istmat.org/node/27971" target="_blank">https://istmat.org/node/27971</a></p>
+                    <p id="ref8">[8] Постановление от 19 декабря 1917 г.: <a href="https://istmat.org/node/28274" target="_blank">https://istmat.org/node/28274</a></p>
+                    <p id="ref9">[9] Декрет от 8 мая 1918 г.: <a href="https://istmat.org/node/29479" target="_blank">https://istmat.org/node/29479</a></p>
+                    <p id="ref10">[10] Декрет от 16 августа 1921 г.: <a href="https://istmat.org/node/46535" target="_blank">https://istmat.org/node/46535</a></p>
+                    <p id="ref11">[11] УК РСФСР 1922 г.: <a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank">https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22</a></p>
+                    <p id="ref12">[12] Декрет от 9 декабря 1922 г.: <a href="https://docs.historyrussia.org/ru/nodes/351608" target="_blank">https://docs.historyrussia.org/ru/nodes/351608</a></p>
+                    <p id="ref13">[13] УК РСФСР 1926 г.: <a href="https://docs.historyrussia.org/ru/nodes/391620" target="_blank">https://docs.historyrussia.org/ru/nodes/391620</a></p>
+                    <p id="ref14">[14] Закон от 7 августа 1932 года: <a href="https://kulturamgo.ru/kalendar-sobytij/den-v-istorii/17395-90-let-nazad-vyshel-zakon-o-trjokh-koloskakh-odno-iz-spornykh-reshenij-vlasti-2" target="_blank">Две страницы закона</a></p>
+                    <p id="ref15">[15] УК РСФСР 1960 г.: <a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/14_ugol_kodeks" target="_blank">https://nnov.hse.ru/ba/law/igpr/sov_gos/14_ugol_kodeks</a></p>
+                    <p id="ref16">[16] Указ от 20 февраля 1962 года: <a href="https://www.consultant.ru/cons/cgi/online.cgi?req=doc&base=ESU&n=26817#0xF626V9ZssgSLk2" target="_blank">https://www.consultant.ru/cons/cgi/online.cgi?req=doc&base=ESU&n=26817</a></p>
+                    <p id="ref17">[17] Указ от 23 мая 1986 года: <a href="https://docs.cntd.ru/document/9006455" target="_blank">https://docs.cntd.ru/document/9006455</a></p>
+                    <p id="ref18">[18] Карикатуры: Из документа с игрой, страницы карикатур</p>
+                    <p id="ref19">[19] Циркуляр НКЮ от 25.09.1922 №86 предписывал: создание специальных судебных камер с заседателями и «ударного списка» - партийных работников, обеспечивающих лояльность и строгость решений; проведение выездных судебных сессий для ускорения рассмотрения дел; применение сокращенного судопроизводства по статьям 107, 40 Уголовно-процессуального кодекса РСФСР 1922 года.</p>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <a href="classification.html" class="nav-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Назад: Классификация
+                </a>
+                <a href="index.html" class="nav-btn next">
+                    На главную
+                    <i class="fas fa-home"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3><i class="fas fa-graduation-cap"></i> Дипломный проект</h3>
+                    <p>Исследование коррупционных преступлений в Советской России</p>
+                    <p>© 2024 Историко-юридический факультет</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Быстрые ссылки</h4>
+                    <ul>
+                        <li><a href="introduction.html">Введение</a></li>
+                        <li><a href="classification.html">Классификация</a></li>
+                        <li><a href="experience.html">Правовое регулирование</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Сайт создан для учебных целей. Все материалы носят исследовательский характер.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
