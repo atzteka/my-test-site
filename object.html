@@ -142,6 +142,227 @@
         .article-link:hover {
             border-bottom: 1px solid var(--primary-color);
         }
+        
+        /* Стили для бургер-меню на этом файле */
+        .burger-menu {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            padding: 10px;
+            z-index: 1001;
+        }
+        
+        /* Адаптивные стили для этого файла */
+        @media (max-width: 992px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 0.7rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .burger-menu {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 15px;
+            }
+            
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                padding: 0;
+                z-index: 1000;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-menu li {
+                width: 100%;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .nav-menu li:last-child {
+                border-bottom: none;
+            }
+            
+            .nav-menu a {
+                display: block;
+                padding: 15px 20px;
+                color: white;
+                text-decoration: none;
+                transition: background-color 0.3s;
+            }
+            
+            .nav-menu a:hover,
+            .nav-menu a.active {
+                background-color: #9a0007;
+            }
+            
+            .navbar {
+                position: relative;
+                padding: 0;
+            }
+            
+            .navbar .container {
+                padding: 0;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .content-section {
+                padding: 1.2rem;
+                border-radius: 8px;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .year-badge {
+                display: block;
+                margin-bottom: 0.5rem;
+                margin-right: 0;
+            }
+            
+            td:first-child,
+            th:first-child {
+                position: sticky;
+                left: 0;
+                background-color: #f9f9f9;
+                z-index: 1;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.5rem;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        /* Стили для сносок - размещаем ПЕРЕД знаком препинания */
+        .sentence-with-footnote {
+            display: inline;
+            position: relative;
+        }
+        
+        /* Сноска теперь будет открываться в новом окне/вкладке при клике */
+        .footnote-ref {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 2px;
+            padding: 0 2px;
+            border-radius: 2px;
+            transition: background-color 0.2s;
+        }
+        
+        .footnote-ref:hover {
+            background-color: rgba(183, 28, 28, 0.1);
+        }
+        
+        /* Прячем оригинальную сноску внизу страницы */
+        .footnote-source {
+            display: none;
+        }
+        
+        /* Всплывающее окно для сносок */
+        .footnote-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 2000;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .footnote-popup.active {
+            display: block;
+        }
+        
+        .footnote-popup-content {
+            position: relative;
+        }
+        
+        .close-footnote {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1999;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -157,7 +378,10 @@
 
     <nav class="navbar">
         <div class="container">
-            <ul class="nav-menu">
+            <button class="burger-menu" id="burgerMenu" aria-label="Меню">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
                 <li><a href="introduction.html"><i class="fas fa-file-alt"></i> Введение</a></li>
                 <li><a href="subject.html"><i class="fas fa-user-tag"></i> Субъект преступления</a></li>
@@ -214,7 +438,7 @@
                             <td><span class="year-badge">1922 г.</span></td>
                             <td>Уголовный кодекс РСФСР 1922 г.</td>
                             <td>
-                                <p>Термин «объект» <strong>в тексте отсутствовал</strong>, но анализ статей показывает, что охранялись: <strong>общественные отношения в сфере нормального функционирования госвласти, госслужбы, интересов государства и прав граждан</strong>.<sup><a href="#ref3">[3]</a></sup></p>
+                                <p>Термин «объект» <strong>в тексте отсутствовал</strong>, но анализ статей показывает, что охранялись: <strong>общественные отношения в сфере нормального функционирования госвласти, госслужбы, интересов государства и прав граждан</strong>.<sup><a href="javascript:void(0);" class="footnote-ref" data-footnote="3">[3]</a></sup></p>
                             </td>
                         </tr>
                         <tr>
@@ -238,7 +462,7 @@
                             <td>Основы уголовного законодательства СССР и союзных республик (ст. 7)</td>
                             <td>
                                 <p>Впервые на законодательном уровне: преступление — это деяние, <strong>«посягающее на советский общественный или государственный строй, социалистическую систему хозяйства, социалистическую собственность, личность, политические, трудовые, имущественные и другие права граждан»</strong>.</p>
-                                <p>Хотя термин «объект» не использовался, перечисленное фактически <strong>являлось официальным перечнем объектов преступления</strong>.</p>
+                                <p>Хотя термин «объект» не использовался, перечисленное фактически <strong>является официальным перечнем объектов преступления</strong>.</p>
                             </td>
                         </tr>
                         <tr>
@@ -275,9 +499,11 @@
                     <p><strong>Эволюция от революционной риторики к формализации:</strong> От эмоциональных формулировок раннего советского периода к более четким юридическим определениям в поздний период.</p>
                 </div>
                 
-                <p id="ref3" style="font-size: 0.9rem; color: #666; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #eee;">
-                    [3] Уголовный кодекс РСФСР 1922 года. Полный текст доступен по ссылке: <a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank">https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22</a>
-                </p>
+                <!-- Перенесенная сноска - теперь скрыта, но доступна для модального окна -->
+                <div class="footnote-source" id="footnote3">
+                    <h4>Источник [3]:</h4>
+                    <p>Уголовный кодекс РСФСР 1922 года. Полный текст доступен по ссылке: <a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank">https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22</a></p>
+                </div>
             </div>
 
             <div class="navigation-buttons">
@@ -315,5 +541,134 @@
             </div>
         </div>
     </footer>
+
+    <!-- Модальное окно для сносок -->
+    <div class="overlay" id="footnoteOverlay"></div>
+    <div class="footnote-popup" id="footnotePopup">
+        <div class="footnote-popup-content">
+            <button class="close-footnote" id="closeFootnote">&times;</button>
+            <div id="footnoteContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Бургер-меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const burgerMenu = document.getElementById('burgerMenu');
+            const navMenu = document.getElementById('navMenu');
+            
+            if (burgerMenu && navMenu) {
+                burgerMenu.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    burgerMenu.innerHTML = navMenu.classList.contains('active') 
+                        ? '<i class="fas fa-times"></i>' 
+                        : '<i class="fas fa-bars"></i>';
+                });
+                
+                // Закрыть меню при клике на ссылку
+                const navLinks = document.querySelectorAll('.nav-menu a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                        burgerMenu.innerHTML = '<i class="fas fa-bars"></i>';
+                    });
+                });
+                
+                // Закрыть меню при клике вне его области
+                document.addEventListener('click', function(event) {
+                    if (!navMenu.contains(event.target) && !burgerMenu.contains(event.target)) {
+                        navMenu.classList.remove('active');
+                        burgerMenu.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                });
+            }
+            
+            // Обработка сносок
+            const footnoteRefs = document.querySelectorAll('.footnote-ref');
+            const footnotePopup = document.getElementById('footnotePopup');
+            const footnoteContent = document.getElementById('footnoteContent');
+            const closeFootnote = document.getElementById('closeFootnote');
+            const footnoteOverlay = document.getElementById('footnoteOverlay');
+            
+            if (footnoteRefs.length > 0) {
+                // Создаем объект с содержанием сносок
+                const footnotes = {
+                    '3': document.getElementById('footnote3').innerHTML
+                };
+                
+                // Обработка кликов по сноскам
+                footnoteRefs.forEach(ref => {
+                    ref.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const footnoteId = this.getAttribute('data-footnote');
+                        
+                        if (footnotes[footnoteId]) {
+                            footnoteContent.innerHTML = footnotes[footnoteId];
+                            footnotePopup.classList.add('active');
+                            footnoteOverlay.classList.add('active');
+                            document.body.style.overflow = 'hidden'; // Запрещаем прокрутку страницы
+                        }
+                    });
+                });
+                
+                // Закрытие модального окна
+                if (closeFootnote) {
+                    closeFootnote.addEventListener('click', function() {
+                        footnotePopup.classList.remove('active');
+                        footnoteOverlay.classList.remove('active');
+                        document.body.style.overflow = 'auto'; // Возвращаем прокрутку
+                    });
+                }
+                
+                // Закрытие по клику на оверлей
+                if (footnoteOverlay) {
+                    footnoteOverlay.addEventListener('click', function() {
+                        footnotePopup.classList.remove('active');
+                        footnoteOverlay.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    });
+                }
+                
+                // Закрытие по ESC
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && footnotePopup.classList.contains('active')) {
+                        footnotePopup.classList.remove('active');
+                        footnoteOverlay.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            }
+            
+            // Адаптивные таблицы
+            const tables = document.querySelectorAll('table');
+            tables.forEach(table => {
+                if (window.innerWidth < 768) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'table-wrapper';
+                    table.parentNode.insertBefore(wrapper, table);
+                    wrapper.appendChild(table);
+                }
+            });
+            
+            // Обработка изменения размера окна
+            window.addEventListener('resize', function() {
+                tables.forEach(table => {
+                    if (window.innerWidth < 768) {
+                        if (!table.parentNode.classList.contains('table-wrapper')) {
+                            const wrapper = document.createElement('div');
+                            wrapper.className = 'table-wrapper';
+                            table.parentNode.insertBefore(wrapper, table);
+                            wrapper.appendChild(table);
+                        }
+                    } else {
+                        if (table.parentNode.classList.contains('table-wrapper')) {
+                            table.parentNode.parentNode.insertBefore(table, table.parentNode);
+                            table.parentNode.remove();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
