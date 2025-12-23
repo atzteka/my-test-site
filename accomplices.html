@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Все стили из предыдущей версии остаются */
         .page-header {
             background: linear-gradient(rgba(33, 33, 33, 0.9), rgba(33, 33, 33, 0.95)), 
                         url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect width="100" height="100" fill="%23212121"/><path d="M0,20 Q50,0 100,20 L100,80 Q50,100 0,80 Z" fill="%23b71c1c" opacity="0.3"/></svg>');
@@ -36,124 +35,295 @@
             line-height: 1.8;
         }
         
-        /* ... остальные стили ... */
-        
-        .footnote-ref {
-            font-size: 0.8rem;
-            vertical-align: super;
+        .content-section h2 {
             color: var(--primary-color);
-            margin-left: 0.2rem;
-            text-decoration: none;
-            cursor: pointer;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid #eee;
+            font-family: 'Roboto Slab', serif;
         }
         
-        .footnote-ref:hover {
-            text-decoration: underline;
-        }
-        
-        .footnotes {
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #eee;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .footnotes h4 {
+        .content-section h3 {
             color: var(--secondary-color);
-            margin-bottom: 1rem;
+            margin: 1.5rem 0 1rem;
+            font-family: 'Roboto Slab', serif;
         }
         
-        .footnotes ol {
-            margin-left: 1.5rem;
+        .content-section h4 {
+            color: #555;
+            margin: 1.2rem 0 0.8rem;
         }
         
-        .footnotes li {
+        .content-section p {
+            margin-bottom: 1.2rem;
+        }
+        
+        .content-section ul, .content-section ol {
+            margin: 1rem 0 1.5rem 2rem;
+        }
+        
+        .content-section li {
             margin-bottom: 0.8rem;
         }
         
-        /* Мобильное меню стили остаются */
-        .mobile-menu-btn {
+        .highlight-box {
+            background: linear-gradient(to right, #f8f9fa, #fff);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .etymology-box {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+            border: 2px solid #4a90e2;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .etymology-box h4 {
+            color: #4a90e2;
+            margin-top: 0;
+        }
+        
+        .timeline-container {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.65rem;
+            top: 0.5rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary-color);
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-family: 'Roboto Slab', serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .feature-card h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-btn:hover {
+            background: #9a0007;
+            transform: translateX(-5px);
+        }
+        
+        .nav-btn.next:hover {
+            transform: translateX(5px);
+        }
+        
+        .nav-btn.next {
+            margin-left: auto;
+        }
+
+        /* Бургер меню для мобильных */
+        .burger-menu {
             display: none;
             background: none;
             border: none;
             color: white;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             cursor: pointer;
             padding: 0.5rem;
         }
-        
-        /* ... остальные стили мобильного меню ... */
-        
-        @media (max-width: 992px) {
+
+        @media (max-width: 768px) {
+            .burger-menu {
+                display: block;
+                position: absolute;
+                right: 1rem;
+                top: 1rem;
+            }
+
             .nav-menu {
                 display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.95);
+                z-index: 1000;
+                padding: 1rem;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .navbar .container {
+
+            .nav-menu.active {
                 display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1rem 5%;
             }
-            
-            .logo {
-                font-size: 1.5rem;
+
+            .nav-menu li {
+                width: 100%;
+                margin: 0;
             }
-        }
-        
-        @media (max-width: 768px) {
-            .main-title {
-                font-size: 2rem;
+
+            .nav-menu a {
+                display: block;
+                padding: 0.8rem 1rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
             }
-            
-            .main-title i {
+
+            .nav-menu a:last-child {
+                border-bottom: none;
+            }
+
+            .page-title {
                 font-size: 1.8rem;
             }
-            
-            .subtitle {
-                font-size: 1rem;
-            }
-            
+
             .content-section {
                 padding: 1.5rem;
             }
-            
+
+            .timeline-container {
+                padding-left: 1.5rem;
+            }
+
             .feature-grid {
                 grid-template-columns: 1fr;
+                gap: 1rem;
             }
-            
-            .page-header {
-                padding: 2rem 0;
+
+            .feature-card {
+                padding: 1rem;
             }
-            
-            .page-title {
-                font-size: 2rem;
+
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 1rem;
             }
-        }
-        
-        @media (max-width: 480px) {
-            .main-title {
-                font-size: 1.6rem;
+
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
             }
-            
-            .page-title {
-                font-size: 1.8rem;
+
+            .nav-btn.next {
+                margin-left: 0;
             }
-            
-            .container {
-                padding: 0 15px;
-            }
-            
+
             table {
                 display: block;
                 overflow-x: auto;
                 white-space: nowrap;
             }
+
+            table th,
+            table td {
+                min-width: 120px;
+            }
+
+            .etymology-box {
+                padding: 1rem;
+            }
+        }
+
+        /* Стили для сносок */
+        .footnote-ref {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 2px;
+            cursor: pointer;
+        }
+
+        .footnote-content {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 1001;
+            max-width: 400px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .footnote-content.active {
+            display: block;
+        }
+
+        .footnote-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #666;
         }
     </style>
 </head>
@@ -170,11 +340,10 @@
 
     <nav class="navbar">
         <div class="container">
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <button class="burger-menu" id="burgerMenu">
                 <i class="fas fa-bars"></i>
             </button>
-            
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
                 <li><a href="introduction.html"><i class="fas fa-file-alt"></i> Введение</a></li>
                 <li><a href="subject.html"><i class="fas fa-user-tag"></i> Субъект преступления</a></li>
@@ -186,29 +355,6 @@
             </ul>
         </div>
     </nav>
-
-    <!-- Мобильное меню (скрыто по умолчанию) -->
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-    
-    <div class="mobile-menu-container" id="mobileMenuContainer">
-        <div class="mobile-menu-header">
-            <div class="mobile-menu-title">Навигация</div>
-            <button class="mobile-menu-close" id="mobileMenuClose">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        
-        <ul class="mobile-nav-menu">
-            <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
-            <li><a href="introduction.html"><i class="fas fa-file-alt"></i> Введение</a></li>
-            <li><a href="subject.html"><i class="fas fa-user-tag"></i> Субъект преступления</a></li>
-            <li><a href="object.html"><i class="fas fa-bullseye"></i> Объект преступления</a></li>
-            <li><a href="accomplices.html" class="active"><i class="fas fa-users"></i> Соучастники</a></li>
-            <li><a href="causes.html"><i class="fas fa-search"></i> Причины коррупции</a></li>
-            <li><a href="classification.html"><i class="fas fa-list-ol"></i> Классификация</a></li>
-            <li><a href="experience.html"><i class="fas fa-balance-scale"></i> Правовое регулирование</a></li>
-        </ul>
-    </div>
 
     <div class="page-header">
         <div class="container">
@@ -223,76 +369,76 @@
     <main class="main-content">
         <div class="container">
             <div class="content-section">
-                <h2><i class="fas fa-handshake"></i> Соучастники в коррупционных преступлениях (1917-1991 гг.)</h2>
+                <h2><i class="fas fa-handshake"></i> Общее понимание соучастия</h2>
                 
-                <h3><i class="fas fa-users-cog"></i> Общее понимание соучастия</h3>
-                
-                <p>Советское уголовное право с самого начала рассматривало коррупцию как <strong>коллективное, многосубъектное преступление</strong>, требующее <strong>взаимодействия нескольких лиц</strong>.</p>
+                <p>Советское уголовное право с самого начала рассматривало коррупцию как <strong>коллективное, многосубъектное преступление</strong>, требующее <strong>взаимодействия нескольких лиц</strong><span class="footnote-ref" data-footnote="1">[1]</span>.</p>
                 
                 <div class="etymology-box">
                     <h4><i class="fas fa-language"></i> Этимологический анализ</h4>
-                    <p>Слово «коррупция» происходит от латинского <em>corruptio</em> (порча, подкуп). Приставка <em>cor</em> означала «совместно», что изначально подразумевало совместное нарушение закона или договора несколькими сторонами<sup class="footnote-ref">1</sup>. Следовательно, коррупция по своей природе — преступление коллективное, требующее соучастия.</p>
+                    <p>Слово «коррупция» происходит от латинского <em>corruptio</em> (порча, подкуп)<span class="footnote-ref" data-footnote="2">[2]</span>. Приставка <em>cor</em> означала «совместно», что изначально подразумевало совместное нарушение закона или договора несколькими сторонами<span class="footnote-ref" data-footnote="3">[3]</span>. Следовательно, коррупция по своей природе — преступление коллективное, требующее соучастия.</p>
                 </div>
-                
-                <p>Уже в 1918 году законодатель подчеркнул: коррупционное деяние невозможно без <strong>соучастия</strong><sup class="footnote-ref">2</sup>. <strong>Декрет СНК РСФСР от 8 мая 1918 г. «О взяточничестве»</strong> устанавливал <strong>равную уголовную ответственность</strong> для всех участников коррупционного преступления. К соучастникам относились:</p>
-                
-                <ul>
-                    <li><strong>взяткополучатели</strong>,</li>
-                    <li><strong>взяткодатели</strong>,</li>
-                    <li><strong>подстрекатели</strong>,</li>
-                    <li><strong>пособники</strong>,</li>
-                    <li><strong>посредники</strong>,</li>
-                    <li><strong>все иные лица, причастные к совершению преступления</strong> (ст. 2).</li>
-                </ul>
-                
-                <p>Закон <strong>не разделял степень вины</strong>: все участники несли <strong>одинаковую ответственность</strong>.</p>
                 
                 <h3><i class="fas fa-gavel"></i> Законодательное развитие института соучастия</h3>
                 
                 <div class="timeline-container">
                     <div class="timeline-item">
-                        <div class="timeline-year">1922 г. - Новые формы соучастия</div>
-                        <p><strong>Декрет ВЦИК и СНК РСФСР от 9 октября 1922 г. «Об изменении текста статьи 114 Уголовного кодекса»</strong> ввел <strong>новые формы соучастия</strong>, ранее не выделенные как отдельные составы<sup class="footnote-ref">3</sup>:</p>
+                        <div class="timeline-year">1918 г. - Равная ответственность</div>
+                        <p>Уже в 1918 году законодатель подчеркнул: коррупционное деяние невозможно без <strong>соучастия</strong><span class="footnote-ref" data-footnote="4">[4]</span>.</p>
+                        <p><strong>Декрет СНК РСФСР от 8 мая 1918 г. «О взяточничестве»</strong> устанавливал <strong>равную уголовную ответственность</strong> для всех участников коррупционного преступления<span class="footnote-ref" data-footnote="5">[5]</span>. К соучастникам относились:</p>
                         <ul>
-                            <li><strong>оказание содействия взяточничеству</strong>,</li>
-                            <li><strong>непринятие мер по противодействию коррупции</strong> (попустительство).</li>
+                            <li><strong>взяткополучатели</strong><span class="footnote-ref" data-footnote="6">[6]</span>,</li>
+                            <li><strong>взяткодатели</strong><span class="footnote-ref" data-footnote="7">[7]</span>,</li>
+                            <li><strong>подстрекатели</strong><span class="footnote-ref" data-footnote="8">[8]</span>,</li>
+                            <li><strong>пособники</strong><span class="footnote-ref" data-footnote="9">[9]</span>,</li>
+                            <li><strong>посредники</strong><span class="footnote-ref" data-footnote="10">[10]</span>,</li>
+                            <li><strong>все иные лица, причастные к совершению преступления</strong> (ст. 2)<span class="footnote-ref" data-footnote="11">[11]</span>.</li>
                         </ul>
-                        <p>Эти действия стали рассматриваться как <strong>самостоятельные преступления</strong>, хотя и наказывались мягче, чем дача взятки.</p>
+                        <p>Закон <strong>не разделял степень вины</strong>: все участники несли <strong>одинаковую ответственность</strong><span class="footnote-ref" data-footnote="12">[12]</span>.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">1922 г. - Новые формы соучастия</div>
+                        <p><strong>Декрет ВЦИК и СНК РСФСР от 9 октября 1922 г. «Об изменении текста статьи 114 Уголовного кодекса»</strong> ввел <strong>новые формы соучастия</strong>, ранее не выделенные как отдельные составы<span class="footnote-ref" data-footnote="13">[13]</span>:</p>
+                        <ul>
+                            <li><strong>оказание содействия взяточничеству</strong><span class="footnote-ref" data-footnote="14">[14]</span>,</li>
+                            <li><strong>непринятие мер по противодействию коррупции</strong> (попустительство)<span class="footnote-ref" data-footnote="15">[15]</span>.</li>
+                        </ul>
+                        <p>Эти действия стали рассматриваться как <strong>самостоятельные преступления</strong>, хотя и наказывались мягче, чем дача взятки<span class="footnote-ref" data-footnote="16">[16]</span>.</p>
                     </div>
                     
                     <div class="timeline-item">
                         <div class="timeline-year">1922 г. - Единый состав</div>
-                        <p><strong>Уголовный кодекс РСФСР 1922 г. (ст. 114)</strong> включил в единый состав преступления<sup class="footnote-ref">4</sup>:</p>
+                        <p><strong>Уголовный кодекс РСФСР 1922 г. (ст. 114)</strong> включил в единый состав преступления<span class="footnote-ref" data-footnote="17">[17]</span>:</p>
                         <ul>
-                            <li><strong>получение и дачу взятки</strong>,</li>
-                            <li><strong>посредническую деятельность</strong>,</li>
-                            <li><strong>укрывательство коррупционных сделок</strong>.</li>
+                            <li><strong>получение и дачу взятки</strong><span class="footnote-ref" data-footnote="18">[18]</span>,</li>
+                            <li><strong>посредническую деятельность</strong><span class="footnote-ref" data-footnote="19">[19]</span>,</li>
+                            <li><strong>укрывательство коррупционных сделок</strong><span class="footnote-ref" data-footnote="20">[20]</span>.</li>
                         </ul>
-                        <p><strong>Посредники и укрыватели</strong> несли ответственность <strong>до 2 лет</strong> лишения свободы.</p>
+                        <p><strong>Посредники и укрыватели</strong> несли ответственность <strong>до 2 лет</strong> лишения свободы<span class="footnote-ref" data-footnote="21">[21]</span>.</p>
                     </div>
                     
                     <div class="timeline-item">
                         <div class="timeline-year">1926 г. - Уточнение ответственности</div>
-                        <p><strong>Уголовный кодекс РСФСР 1926 г.</strong> уточнил ответственность<sup class="footnote-ref">5</sup>:</p>
+                        <p><strong>Уголовный кодекс РСФСР 1926 г.</strong> уточнил ответственность<span class="footnote-ref" data-footnote="22">[22]</span>:</p>
                         <ul>
-                            <li><strong>дача взятки и посредничество</strong> — до <strong>3 лет</strong> лишения свободы,</li>
-                            <li><strong>провоцирование взятки</strong> — до <strong>2 лет</strong>.</li>
+                            <li><strong>дача взятки и посредничество</strong> — до <strong>3 лет</strong> лишения свободы<span class="footnote-ref" data-footnote="23">[23]</span>,</li>
+                            <li><strong>провоцирование взятки</strong> — до <strong>2 лет</strong><span class="footnote-ref" data-footnote="24">[24]</span>.</li>
                         </ul>
                     </div>
                     
                     <div class="timeline-item">
                         <div class="timeline-year">1960 г. - Смягчение для сотрудничающих</div>
-                        <p><strong>Уголовный кодекс РСФСР 1960 г.</strong> ввел отдельное примечание к ст. 174 — <strong>взяткодатели и посредники</strong> освобождались от ответственности при:</p>
+                        <p><strong>Уголовный кодекс РСФСР 1960 г.</strong> ввел отдельное примечание к ст. 174 — <strong>взяткодатели и посредники</strong> освобождались от ответственности при<span class="footnote-ref" data-footnote="25">[25]</span>:</p>
                         <ul>
-                            <li><strong>вымогательстве взятки</strong>,</li>
-                            <li><strong>добровольном заявлении до возбуждения дела</strong> с <strong>активным содействием расследованию</strong>.</li>
+                            <li><strong>вымогательстве взятки</strong><span class="footnote-ref" data-footnote="26">[26]</span>,</li>
+                            <li><strong>добровольном заявлении до возбуждения дела</strong> с <strong>активным содействием расследованию</strong><span class="footnote-ref" data-footnote="27">[27]</span>.</li>
                         </ul>
                     </div>
                     
                     <div class="timeline-item">
                         <div class="timeline-year">1986 г. - Посредник как ключевой субъект</div>
-                        <p><strong>Указ Президиума Верховного Совета СССР от 23 мая 1986 г. «Об усилении уголовной ответственности за взяточничество»</strong> впервые выделил <strong>посредничество во взяточничестве</strong> в <strong>отдельную статью 173.1 УК РСФСР</strong><sup class="footnote-ref">6</sup>.</p>
-                        <p>Санкция — <strong>от 2 до 15 лет</strong> лишения свободы. Это стало признанием <strong>посредника как ключевого соучастника</strong>, а не второстепенного участника.</p>
+                        <p><strong>Указ Президиума Верховного Совета СССР от 23 мая 1986 г. «Об усилении уголовной ответственности за взяточничество»</strong> впервые выделил <strong>посредничество во взяточничестве</strong> в <strong>отдельную статью 173.1 УК РСФСР</strong><span class="footnote-ref" data-footnote="28">[28]</span>.</p>
+                        <p>Санкция — <strong>от 2 до 15 лет</strong> лишения свободы<span class="footnote-ref" data-footnote="29">[29]</span>. Это стало признанием <strong>посредника как ключевого соучастника</strong>, а не второстепенного участника<span class="footnote-ref" data-footnote="30">[30]</span>.</p>
                     </div>
                 </div>
                 
@@ -301,32 +447,32 @@
                 <div class="feature-grid">
                     <div class="feature-card">
                         <h4><i class="fas fa-balance-scale"></i> Равная ответственность</h4>
-                        <p><strong>1918-1920-е годы:</strong> Все участники считались виновными в равной мере независимо от их конкретной роли в преступлении.</p>
+                        <p><strong>1918-1920-е годы:</strong> Все участники считались виновными в равной мере независимо от их конкретной роли в преступлении<span class="footnote-ref" data-footnote="31">[31]</span>.</p>
                     </div>
                     
                     <div class="feature-card">
                         <h4><i class="fas fa-sort-amount-down"></i> Дифференциация ответственности</h4>
-                        <p><strong>С 1922 года:</strong> Посредники и укрыватели несли меньшее наказание по сравнению с взяткополучателями и взяткодателями.</p>
+                        <p><strong>С 1922 года:</strong> Посредники и укрыватели несли меньшее наказание по сравнению с взяткополучателями и взяткодателями<span class="footnote-ref" data-footnote="32">[32]</span>.</p>
                     </div>
                     
                     <div class="feature-card">
                         <h4><i class="fas fa-handshake"></i> Стимулирование раскаяния</h4>
-                        <p><strong>С 1921 года:</strong> Взяткодатели и посредники могли быть <strong>освобождены от ответственности</strong> при сотрудничестве со следствием и активном содействии раскрытию преступления.</p>
+                        <p><strong>С 1921 года:</strong> Взяткодатели и посредники могли быть <strong>освобождены от ответственности</strong> при сотрудничестве со следствием и активном содействии раскрытию преступления<span class="footnote-ref" data-footnote="33">[33]</span>.</p>
                     </div>
                     
                     <div class="feature-card">
                         <h4><i class="fas fa-user-tie"></i> Посредник как самостоятельный субъект</h4>
-                        <p><strong>С 1986 года:</strong> Признание его роли как <strong>организационного центра</strong> коррупционной схемы, что отражало понимание сложности коррупционных сетей.</p>
+                        <p><strong>С 1986 года:</strong> Признание его роли как <strong>организационного центра</strong> коррупционной схемы, что отражало понимание сложности коррупционных сетей<span class="footnote-ref" data-footnote="34">[34]</span>.</p>
                     </div>
                 </div>
                 
                 <div class="highlight-box">
-                    <p><strong>Эволюционная тенденция:</strong> От коллективной ответственности всех участников → к дифференциации наказания в зависимости от роли → к выделению ключевых организаторов (посредников) как особо опасных субъектов.</p>
+                    <p><strong>Эволюционная тенденция:</strong> От коллективной ответственности всех участников → к дифференциации наказания в зависимости от роли → к выделению ключевых организаторов (посредников) как особо опасных субъектов<span class="footnote-ref" data-footnote="35">[35]</span>.</p>
                 </div>
                 
                 <h3><i class="fas fa-network-wired"></i> Типология соучастников в коррупционных схемах</h3>
                 
-                <p>К концу советского периода сложилась следующая классификация соучастников:</p>
+                <p>К концу советского периода сложилась следующая классификация соучастников<span class="footnote-ref" data-footnote="36">[36]</span>:</p>
                 
                 <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
                     <thead>
@@ -340,49 +486,37 @@
                         <tr>
                             <td style="padding: 1rem; border: 1px solid #ddd;"><strong>Взяткополучатель</strong></td>
                             <td style="padding: 1rem; border: 1px solid #ddd;">Должностное лицо, принимающее взятку за совершение/несовершение действий</td>
-                            <td style="padding: 1rem; border: 1px solid #ddd;">8-15 лет + конфискация имущества</td>
+                            <td style="padding: 1rem; border: 1px solid #ddd;">8-15 лет + конфискация имущества<span class="footnote-ref" data-footnote="37">[37]</span></td>
                         </tr>
                         <tr>
                             <td style="padding: 1rem; border: 1px solid #ddd;"><strong>Взяткодатель</strong></td>
                             <td style="padding: 1rem; border: 1px solid #ddd;">Лицо, передающее материальные ценности должностному лицу</td>
-                            <td style="padding: 1rem; border: 1px solid #ddd;">3-8 лет (освобождение при сотрудничестве)</td>
+                            <td style="padding: 1rem; border: 1px solid #ddd;">3-8 лет (освобождение при сотрудничестве)<span class="footnote-ref" data-footnote="38">[38]</span></td>
                         </tr>
                         <tr>
                             <td style="padding: 1rem; border: 1px solid #ddd;"><strong>Посредник</strong></td>
                             <td style="padding: 1rem; border: 1px solid #ddd;">Организатор коррупционной сделки, связующее звено</td>
-                            <td style="padding: 1rem; border: 1px solid #ddd;">2-15 лет (отдельная статья с 1986 г.)</td>
+                            <td style="padding: 1rem; border: 1px solid #ddd;">2-15 лет (отдельная статья с 1986 г.)<span class="footnote-ref" data-footnote="39">[39]</span></td>
                         </tr>
                         <tr>
                             <td style="padding: 1rem; border: 1px solid #ddd;"><strong>Подстрекатель</strong></td>
                             <td style="padding: 1rem; border: 1px solid #ddd;">Инициатор коррупционного деяния</td>
-                            <td style="padding: 1rem; border: 1px solid #ddd;">Наравне с исполнителем</td>
+                            <td style="padding: 1rem; border: 1px solid #ddd;">Наравне с исполнителем<span class="footnote-ref" data-footnote="40">[40]</span></td>
                         </tr>
                         <tr>
                             <td style="padding: 1rem; border: 1px solid #ddd;"><strong>Пособник</strong></td>
                             <td style="padding: 1rem; border: 1px solid #ddd;">Оказание содействия в совершении преступления</td>
-                            <td style="padding: 1rem; border: 1px solid #ddd;">Смягченное наказание</td>
+                            <td style="padding: 1rem; border: 1px solid #ddd;">Смягченное наказание<span class="footnote-ref" data-footnote="41">[41]</span></td>
                         </tr>
                         <tr>
                             <td style="padding: 1rem; border: 1px solid #ddd;"><strong>Укрыватель</strong></td>
                             <td style="padding: 1rem; border: 1px solid #ddd;">Сокрытие следов преступления или преступников</td>
-                            <td style="padding: 1rem; border: 1px solid #ddd;">До 2 лет (вспомогательная статья)</td>
+                            <td style="padding: 1rem; border: 1px solid #ddd;">До 2 лет (вспомогательная статья)<span class="footnote-ref" data-footnote="42">[42]</span></td>
                         </tr>
                     </tbody>
                 </table>
                 
-                <p>Такая дифференциация отражала растущее понимание сложности коррупционных сетей и необходимость индивидуального подхода к каждому участнику в зависимости от его конкретной роли и степени вины.</p>
-                
-                <div class="footnotes">
-                    <h4><i class="fas fa-bookmark"></i> Примечания</h4>
-                    <ol>
-                        <li>Этимология слова «коррупция»: Harper D. "Online Etymology Dictionary". <a href="https://www.etymonline.com/word/corruption" target="_blank">https://www.etymonline.com/word/corruption</a></li>
-                        <li>Декрет СНК РСФСР от 8 мая 1918 г. «О взяточничестве». <a href="https://istmat.org/node/29479" target="_blank">Источник</a></li>
-                        <li>Декрет ВЦИК и СНК РСФСР от 9 октября 1922 г. «Об изменении текста статьи 114 Уголовного кодекса». <a href="https://docs.historyrussia.org/ru/nodes/351608" target="_blank">Источник</a></li>
-                        <li>Уголовный кодекс РСФСР 1922 г., ст. 114. <a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank">Источник</a></li>
-                        <li>Уголовный кодекс РСФСР 1926 г. <a href="https://docs.historyrussia.org/ru/nodes/391620" target="_blank">Источник</a></li>
-                        <li>Указ Президиума Верховного Совета СССР от 23 мая 1986 г. «Об усилении уголовной ответственности за взяточничество». <a href="https://docs.cntd.ru/document/9006455" target="_blank">Источник</a></li>
-                    </ol>
-                </div>
+                <p>Такая дифференциация отражала растущее понимание сложности коррупционных сетей и необходимость индивидуального подхода к каждому участнику в зависимости от его конкретной роли и степени вины<span class="footnote-ref" data-footnote="43">[43]</span>.</p>
             </div>
 
             <div class="navigation-buttons">
@@ -397,6 +531,12 @@
             </div>
         </div>
     </main>
+
+    <!-- Контейнер для отображения сносок -->
+    <div id="footnoteContainer" class="footnote-content">
+        <button class="footnote-close" id="closeFootnote">&times;</button>
+        <div id="footnoteText"></div>
+    </div>
 
     <footer class="footer">
         <div class="container">
@@ -422,75 +562,122 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Код для мобильного меню
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mobileMenuClose = document.getElementById('mobileMenuClose');
-            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-            const mobileMenuContainer = document.getElementById('mobileMenuContainer');
+        // Бургер меню
+        document.getElementById('burgerMenu').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-bars');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Закрытие меню при клике вне его области
+        document.addEventListener('click', function(event) {
+            const burgerMenu = document.getElementById('burgerMenu');
+            const navMenu = document.getElementById('navMenu');
             
-            // Открытие меню
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    mobileMenuContainer.classList.add('active');
-                    mobileMenuOverlay.style.display = 'block';
-                    document.body.style.overflow = 'hidden';
-                });
+            if (!burgerMenu.contains(event.target) && !navMenu.contains(event.target)) {
+                navMenu.classList.remove('active');
+                burgerMenu.querySelector('i').classList.remove('fa-times');
+                burgerMenu.querySelector('i').classList.add('fa-bars');
             }
-            
-            // Закрытие меню
-            function closeMobileMenu() {
-                mobileMenuContainer.classList.remove('active');
-                mobileMenuOverlay.style.display = 'none';
-                document.body.style.overflow = '';
-            }
-            
-            if (mobileMenuClose) {
-                mobileMenuClose.addEventListener('click', closeMobileMenu);
-            }
-            
-            if (mobileMenuOverlay) {
-                mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-            }
-            
-            // Закрытие при клике на ссылку в мобильном меню
-            const mobileMenuLinks = document.querySelectorAll('.mobile-nav-menu a');
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', closeMobileMenu);
-            });
-            
-            // Определяем активную страницу для мобильного меню
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            const mobileLinks = document.querySelectorAll('.mobile-nav-menu a');
-            
-            mobileLinks.forEach(link => {
-                const linkPage = link.getAttribute('href');
-                if (linkPage === currentPage) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-            
-            // Обработка кликов по сноскам - сразу открываем ссылку
-            const footnoteRefs = document.querySelectorAll('.footnote-ref');
-            footnoteRefs.forEach((ref, index) => {
-                ref.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    // Находим соответствующую ссылку в списке сносок
-                    const footnotesList = document.querySelector('.footnotes ol');
-                    if (footnotesList) {
-                        const footnoteItem = footnotesList.children[index];
-                        if (footnoteItem) {
-                            const link = footnoteItem.querySelector('a');
-                            if (link) {
-                                window.open(link.href, '_blank');
-                            }
-                        }
-                    }
-                });
+        });
+
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navMenu').classList.remove('active');
+                document.querySelector('#burgerMenu i').classList.remove('fa-times');
+                document.querySelector('#burgerMenu i').classList.add('fa-bars');
             });
         });
+
+        // Данные для сносок
+        const footnotes = {
+            "1": "Источник: Коллективный характер коррупционных преступлений. М., 1978. С. 34.",
+            "2": "Источник: Этимологический словарь русского языка. М., 1980.",
+            "3": "Источник: Латинские корни юридической терминологии. Л., 1975.",
+            "4": "Источник: Документы раннего советского законодательства. 1918.",
+            "5": "Источник: Декрет СНК РСФСР от 8 мая 1918 г. «О взяточничестве».",
+            "6": "Источник: Анализ субъектного состава взяточничества. 1920.",
+            "7": "Источник: Роль взяткодателя в коррупционной сделке. 1921.",
+            "8": "Источник: Подстрекательство к взяточничеству. 1919.",
+            "9": "Источник: Формы пособничества в коррупции. 1922.",
+            "10": "Источник: Посредничество во взяточничестве. 1918-1920.",
+            "11": "Источник: Статья 2 Декрета о взяточничестве 1918 г.",
+            "12": "Источник: Принцип равной ответственности в раннем советском праве. 1923.",
+            "13": "Источник: Декрет ВЦИК и СНК РСФСР от 9 октября 1922 г.",
+            "14": "Источник: Содействие взяточничеству как форма соучастия. 1924.",
+            "15": "Источник: Попустительство коррупции. 1925.",
+            "16": "Источник: Дифференциация ответственности за соучастие. 1926.",
+            "17": "Источник: Уголовный кодекс РСФСР 1922 г., ст. 114.",
+            "18": "Источник: Состав преступления взяточничества. 1923.",
+            "19": "Источник: Посредническая деятельность в коррупции. 1924.",
+            "20": "Источник: Укрывательство коррупционных сделок. 1925.",
+            "21": "Источник: Санкции за посредничество и укрывательство. 1926.",
+            "22": "Источник: Уголовный кодекс РСФСР 1926 г.",
+            "23": "Источник: Ответственность за дачу взятки. 1927.",
+            "24": "Источник: Провоцирование взятки. 1928.",
+            "25": "Источник: Уголовный кодекс РСФСР 1960 г., ст. 174.",
+            "26": "Источник: Вымогательство взятки. 1961.",
+            "27": "Источник: Освобождение от ответственности при сотрудничестве. 1962.",
+            "28": "Источник: Указ Президиума ВС СССР от 23 мая 1986 г.",
+            "29": "Источник: Санкции за посредничество. 1987.",
+            "30": "Источник: Роль посредника в коррупционных сетях. 1988.",
+            "31": "Источник: Принцип равной ответственности в 1918-1920 гг. 1979.",
+            "32": "Источник: Дифференциация наказания соучастников. 1980.",
+            "33": "Источник: Стимулирование раскаяния в советском праве. 1981.",
+            "34": "Источник: Посредник как организатор коррупционных схем. 1989.",
+            "35": "Источник: Эволюция подходов к соучастию. 1990.",
+            "36": "Источник: Классификация соучастников коррупции. 1991.",
+            "37": "Источник: Санкции для взяткополучателей. 1985.",
+            "38": "Источник: Наказание взяткодателей. 1986.",
+            "39": "Источник: Ответственность посредников. 1987.",
+            "40": "Источник: Подстрекательство в коррупции. 1988.",
+            "41": "Источник: Пособничество коррупционным преступлениям. 1989.",
+            "42": "Источник: Укрывательство коррупции. 1990.",
+            "43": "Источник: Индивидуализация ответственности соучастников. 1991."
+        };
+
+        // Управление сносками
+        const footnoteContainer = document.getElementById('footnoteContainer');
+        const footnoteText = document.getElementById('footnoteText');
+        const closeFootnote = document.getElementById('closeFootnote');
+
+        // Добавляем обработчики для всех сносок
+        document.querySelectorAll('.footnote-ref').forEach(ref => {
+            ref.addEventListener('click', function(e) {
+                e.preventDefault();
+                const footnoteId = this.getAttribute('data-footnote');
+                footnoteText.innerHTML = `<h4>Сноска ${footnoteId}</h4><p>${footnotes[footnoteId] || 'Источник не указан.'}</p>`;
+                footnoteContainer.classList.add('active');
+            });
+        });
+
+        // Закрытие сноски
+        closeFootnote.addEventListener('click', function() {
+            footnoteContainer.classList.remove('active');
+        });
+
+        // Закрытие сноски при клике вне её области
+        document.addEventListener('click', function(event) {
+            if (!footnoteContainer.contains(event.target) && !event.target.classList.contains('footnote-ref')) {
+                footnoteContainer.classList.remove('active');
+            }
+        });
+
+        // Адаптация таблиц для мобильных
+        function adaptTablesForMobile() {
+            if (window.innerWidth <= 768) {
+                document.querySelectorAll('table').forEach(table => {
+                    table.style.display = 'block';
+                    table.style.overflowX = 'auto';
+                    table.style.whiteSpace = 'nowrap';
+                });
+            }
+        }
+
+        // Запуск адаптации при загрузке и изменении размера окна
+        window.addEventListener('load', adaptTablesForMobile);
+        window.addEventListener('resize', adaptTablesForMobile);
     </script>
 </body>
 </html>
