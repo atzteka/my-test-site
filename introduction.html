@@ -32,6 +32,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
+            line-height: 1.8;
         }
         
         .content-section h2 {
@@ -42,9 +43,22 @@
             font-family: 'Roboto Slab', serif;
         }
         
+        .content-section h3 {
+            color: var(--secondary-color);
+            margin: 1.5rem 0 1rem;
+            font-family: 'Roboto Slab', serif;
+        }
+        
         .content-section p {
             margin-bottom: 1.2rem;
-            line-height: 1.7;
+        }
+        
+        .content-section ul, .content-section ol {
+            margin: 1rem 0 1.5rem 2rem;
+        }
+        
+        .content-section li {
+            margin-bottom: 0.8rem;
         }
         
         .highlight-box {
@@ -52,46 +66,18 @@
             border-left: 4px solid var(--primary-color);
             padding: 1.5rem;
             margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
         }
         
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: var(--primary-color);
-        }
-        
-        .timeline-item {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-        
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2.3rem;
-            top: 0.5rem;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--accent-color);
-            border: 3px solid white;
-            box-shadow: 0 0 0 3px var(--primary-color);
-        }
-        
-        .timeline-year {
-            font-weight: bold;
+        .highlight-box strong {
             color: var(--primary-color);
-            font-family: 'Roboto Slab', serif;
+        }
+        
+        .reference {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 0.5rem;
         }
         
         .navigation-buttons {
@@ -112,6 +98,7 @@
             text-decoration: none;
             border-radius: 5px;
             transition: all 0.3s ease;
+            font-weight: 500;
         }
         
         .nav-btn:hover {
@@ -125,6 +112,56 @@
         
         .nav-btn.next {
             margin-left: auto;
+        }
+        
+        .footnote {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .footnote h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            padding: 1rem;
+            text-align: left;
+            font-family: 'Roboto Slab', serif;
+        }
+        
+        td {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .year-badge {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
         }
     </style>
 </head>
@@ -160,106 +197,64 @@
                 <i class="fas fa-file-alt"></i>
                 Введение
             </h1>
-            <p>Обзор исследования коррупционных преступлений в Советской России</p>
+            <p>Исторический и правовой анализ коррупции в СССР (1917-1991 гг.)</p>
         </div>
     </div>
 
     <main class="main-content">
         <div class="container">
             <div class="content-section">
-                <h2><i class="fas fa-bullseye"></i> Цель исследования</h2>
-                <p>Целью настоящего исследования является комплексный анализ коррупционных преступлений в Советской России, включая изучение их субъективных и объективных признаков, причин возникновения, классификации и правового регулирования борьбы с данными правонарушениями.</p>
+                <h2><i class="fas fa-history"></i> КОРРУПЦИЯ В СОВЕТСКОЙ РОССИИ</h2>
+                
+                <p>В советской России термин «коррупция» как единое законодательное понятие отсутствовал на протяжении всего периода 1917-1991 годов. Власть видела в нем буржуазный пережиток, несовместимый с социализмом, и отрицала коррупцию как системное явление, трактуя её как отдельные нарушения дисциплины или «пережитки капитализма». Вместо него использовались идеологически окрашенные категории: «взяточничество», «злоупотребление служебным положением», «хищение социалистической собственности», «служебный подлог» или «экономическая контрреволюция».</p>
                 
                 <div class="highlight-box">
-                    <p><strong>Ключевой вопрос исследования:</strong> Каковы были особенности проявления коррупции в условиях советской политико-экономической системы и как они влияли на эффективность государственного управления?</p>
+                    <p><strong>Ключевой парадокс:</strong> Несмотря на официальный запрет, термин «коррупция» появлялся в юридической науке советского периода, но игнорировался в законодательстве и пропаганде.</p>
                 </div>
-            </div>
-
-            <div class="content-section">
-                <h2><i class="fas fa-tasks"></i> Задачи исследования</h2>
                 
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-year">Задача 1</div>
-                        <p>Изучить исторические предпосылки и условия возникновения коррупции в советский период.</p>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-year">Задача 2</div>
-                        <p>Проанализировать нормативно-правовую базу СССР, регулировавшую вопросы противодействия коррупции.</p>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-year">Задача 3</div>
-                        <p>Исследовать субъективные и объективные признаки коррупционных преступлений.</p>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-year">Задача 4</div>
-                        <p>Классифицировать формы и виды коррупционных проявлений в различных сферах государственной деятельности.</p>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-year">Задача 5</div>
-                        <p>Выявить причины и условия, способствовавшие распространению коррупции в советском обществе.</p>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-year">Задача 6</div>
-                        <p>Проанализировать эффективность мер, принимавшихся советским государством для борьбы с коррупцией.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="content-section">
-                <h2><i class="fas fa-scroll"></i> Методология исследования</h2>
-                <p>В исследовании применяются следующие методы:</p>
+                <h3><i class="fas fa-book"></i> Научное использование термина</h3>
                 
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--primary-color);">
-                        <h3 style="color: var(--primary-color); margin-bottom: 0.8rem; font-size: 1.1rem;">Исторический метод</h3>
-                        <p>Анализ развития коррупционных явлений в хронологической последовательности.</p>
-                    </div>
-                    
-                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent-color);">
-                        <h3 style="color: var(--accent-color); margin-bottom: 0.8rem; font-size: 1.1rem;">Сравнительно-правовой</h3>
-                        <p>Сопоставление правовых норм разных периодов советской истории.</p>
-                    </div>
-                    
-                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--primary-color);">
-                        <h3 style="color: var(--primary-color); margin-bottom: 0.8rem; font-size: 1.1rem;">Статистический анализ</h3>
-                        <p>Изучение данных о выявленных коррупционных преступлениях.</p>
-                    </div>
-                    
-                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent-color);">
-                        <h3 style="color: var(--accent-color); margin-bottom: 0.8rem; font-size: 1.1rem;">Системный подход</h3>
-                        <p>Рассмотрение коррупции как элемента социально-политической системы.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="content-section">
-                <h2><i class="fas fa-history"></i> Хронологические рамки</h2>
-                <p>Исследование охватывает период с 1917 по 1991 год — время существования Советского государства. Особое внимание уделяется ключевым этапам:</p>
-                
-                <ul style="list-style: none; margin: 1.5rem 0;">
-                    <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 1rem;">
-                        <i class="fas fa-calendar-check" style="color: var(--primary-color);"></i>
-                        <span><strong>1917-1920-е годы:</strong> Становление советской власти и первые антикоррупционные меры</span>
-                    </li>
-                    <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 1rem;">
-                        <i class="fas fa-calendar-check" style="color: var(--primary-color);"></i>
-                        <span><strong>1930-1950-е годы:</strong> Период сталинизма и ужесточение контроля</span>
-                    </li>
-                    <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 1rem;">
-                        <i class="fas fa-calendar-check" style="color: var(--primary-color);"></i>
-                        <span><strong>1960-1970-е годы:</strong> "Застойный" период и развитие теневой экономики</span>
-                    </li>
-                    <li style="padding: 0.8rem 0; display: flex; align-items: center; gap: 1rem;">
-                        <i class="fas fa-calendar-check" style="color: var(--primary-color);"></i>
-                        <span><strong>1980-1991 годы:</strong> Перестройка и системный кризис</span>
-                    </li>
+                <ul>
+                    <li><span class="year-badge">1913</span> Советский юрист <strong>А.Я. Эстрин</strong> использовал слово «коррупция» в своей монографии «Взяточничество».</li>
+                    <li><span class="year-badge">1928</span> В книге «Должностные преступления» он дал четкое определение. Под коррупцией понималась подкупность и продажность как государственных служащих, так и общественно-политических фигур в самом широком смысле.</li>
                 </ul>
+                
+                <h3><i class="fas fa-gavel"></i> Официальное признание</h3>
+                
+                <p>Термин <strong>«коррупция» впервые появился в официальном документе СССР только в 1989 году</strong> в <strong>Постановлении Съезда народных депутатов СССР от 23 декабря 1989 года «Об усилении борьбы с организованной преступностью»</strong>.<sup><a href="#ref1">[1]</a></sup></p>
+                
+                <p>В документе использовались формулировки:</p>
+                
+                <ul>
+                    <li>«происходит сращивание преступных групп с <strong>коррумпированными должностными лицами</strong>»;</li>
+                    <li>«борьба с ... <strong>коррупцией</strong>, бесхозяйственностью, расточительством...»</li>
+                </ul>
+                
+                <p>Это стало <strong>признанием коррупции как системного явления</strong>, хотя и в контексте борьбы с организованной преступностью.</p>
+                
+                <h3><i class="fas fa-balance-scale-right"></i> Современное определение</h3>
+                
+                <p>Первое юридическое определение появилось только в <strong>Федеральном законе от 25 декабря 2008 года № 273-ФЗ «О противодействии коррупции»</strong>:<sup><a href="#ref2">[2]</a></sup></p>
+                
+                <div class="highlight-box">
+                    <p><strong>Коррупция</strong> — это противоправное использование лицом своего служебного положения вопреки законным интересам общества и государства с целью получения имущественной или иной выгоды как для себя лично, так и в интересах третьих лиц, включая случаи, когда такое лицо не являлось должностным.</p>
+                </div>
+                
+                <p>Таким образом, законодательное определение подчёркивало три ключевых признака:</p>
+                
+                <ol>
+                    <li>Выгода исключительно имущественного или иного материального характера;</li>
+                    <li>Возможность получения выгоды не только лично коррупционером, но и для других лиц;</li>
+                    <li>Субъект преступления может быть не только должностным лицом, но и любым физическим или юридическим лицом.</li>
+                </ol>
+                
+                <p><strong>Разница с 2008 годом</strong> в том, что в 1989 году термин упоминался впервые в официальном документе, но без закрепления как правового понятия — он не имел юридической силы, не определял состав преступления и не менял подход к преследованиям.</p>
+                
+                <div class="footnote">
+                    <h4><i class="fas fa-bookmark"></i> Примечания</h4>
+                    <p id="ref1">[1] Постановление Съезда народных депутатов СССР от 23 декабря 1989 года «Об усилении борьбы с организованной преступностью». С. 246-4 — 246-7. <a href="https://rusneb.ru/catalog/000202_000006_18eb9452-6bf7-4e35-a55f-c3cac401bd0a/" target="_blank">Источник</a></p>
+                    <p id="ref2">[2] Федеральный закон от 25 декабря 2008 года № 273-ФЗ «О противодействии коррупции». <a href="https://www.consultant.ru/document/cons_doc_LAW_82959/bbbd4641125b222beaf7483e16c594116ed2d9a1/" target="_blank">Источник</a></p>
+                </div>
             </div>
 
             <div class="navigation-buttons">
