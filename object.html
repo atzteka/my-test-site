@@ -142,6 +142,112 @@
         .article-link:hover {
             border-bottom: 1px solid var(--primary-color);
         }
+        
+        /* Стили для сносок */
+        .footnote-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0 2px;
+        }
+        
+        .footnote-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Модальное окно для сносок */
+        .footnote-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .footnote-modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .modal-title {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin: 0;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .close-modal:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .modal-body {
+            line-height: 1.6;
+        }
+        
+        .modal-source-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+        
+        .modal-source-link:hover {
+            background: #9a0007;
+        }
+        
+        .modal-footer {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            font-size: 0.85rem;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -214,7 +320,7 @@
                             <td><span class="year-badge">1922 г.</span></td>
                             <td>Уголовный кодекс РСФСР 1922 г.</td>
                             <td>
-                                <p>Термин «объект» <strong>в тексте отсутствовал</strong>, но анализ статей показывает, что охранялись: <strong>общественные отношения в сфере нормального функционирования госвласти, госслужбы, интересов государства и прав граждан</strong>.<sup><a href="#ref3">[3]</a></sup></p>
+                                <p>Термин «объект» <strong>в тексте отсутствовал</strong>, но анализ статей показывает, что охранялись: <strong>общественные отношения в сфере нормального функционирования госвласти, госслужбы, интересов государства и прав граждан</strong>.<sup><a class="footnote-link" data-footnote="3">[3]</a></sup></p>
                             </td>
                         </tr>
                         <tr>
@@ -274,10 +380,6 @@
                     <p><strong>Коллективистский подход:</strong> Акцент на защите общественных и государственных интересов, а не индивидуальных прав.</p>
                     <p><strong>Эволюция от революционной риторики к формализации:</strong> От эмоциональных формулировок раннего советского периода к более четким юридическим определениям в поздний период.</p>
                 </div>
-                
-                <p id="ref3" style="font-size: 0.9rem; color: #666; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #eee;">
-                    [3] Уголовный кодекс РСФСР 1922 года. Полный текст доступен по ссылке: <a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank">https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22</a>
-                </p>
             </div>
 
             <div class="navigation-buttons">
@@ -292,6 +394,22 @@
             </div>
         </div>
     </main>
+
+    <!-- Модальное окно для сносок -->
+    <div class="footnote-modal" id="footnoteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Примечание</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Содержимое будет заполняться JavaScript -->
+            </div>
+            <div class="modal-footer">
+                Нажмите на крестик или вне окна для закрытия
+            </div>
+        </div>
+    </div>
 
     <footer class="footer">
         <div class="container">
@@ -315,5 +433,68 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Данные для сносок
+        const footnotes = {
+            "3": {
+                title: "Уголовный кодекс РСФСР 1922 года",
+                content: "Уголовный кодекс РСФСР 1922 года. Полный текст доступен по ссылке.",
+                link: "https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22",
+                linkText: "Открыть источник"
+            }
+        };
+
+        // Получаем элементы
+        const footnoteModal = document.getElementById('footnoteModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const closeModalBtn = document.getElementById('closeModal');
+        
+        // Добавляем обработчики для всех ссылок на сноски
+        document.querySelectorAll('.footnote-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const footnoteId = this.getAttribute('data-footnote');
+                
+                if (footnotes[footnoteId]) {
+                    const footnote = footnotes[footnoteId];
+                    
+                    // Заполняем заголовок и содержимое модального окна
+                    modalTitle.textContent = `Примечание [${footnoteId}]`;
+                    
+                    // Показываем только содержание
+                    modalBody.innerHTML = `
+                        <p>${footnote.content}</p>
+                        ${footnote.link ? `<a href="${footnote.link}" target="_blank" class="modal-source-link">
+                            <i class="fas fa-external-link-alt"></i> ${footnote.linkText}
+                        </a>` : ''}
+                    `;
+                    
+                    // Показываем модальное окно
+                    footnoteModal.classList.add('active');
+                }
+            });
+        });
+        
+        // Закрытие модального окна
+        closeModalBtn.addEventListener('click', () => {
+            footnoteModal.classList.remove('active');
+        });
+        
+        // Закрытие при клике вне модального окна
+        footnoteModal.addEventListener('click', (e) => {
+            if (e.target === footnoteModal) {
+                footnoteModal.classList.remove('active');
+            }
+        });
+        
+        // Закрытие при нажатии ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && footnoteModal.classList.contains('active')) {
+                footnoteModal.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
