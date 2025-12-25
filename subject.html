@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Субъект преступления - Советская Россия</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            background: linear-gradient(rgba(33, 33, 33, 0.9), rgba(33, 33, 33, 0.95)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect width="100" height="100" fill="%23212121"/><path d="M0,20 Q50,0 100,20 L100,80 Q50,100 0,80 Z" fill="%23b71c1c" opacity="0.3"/></svg>');
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title {
+            font-family: 'Roboto Slab', serif;
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .content-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid #eee;
+            font-family: 'Roboto Slab', serif;
+        }
+        
+        .content-section h3 {
+            color: var(--secondary-color);
+            margin: 1.5rem 0 1rem;
+            font-family: 'Roboto Slab', serif;
+        }
+        
+        .content-section p {
+            margin-bottom: 1.2rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(to right, #f8f9fa, #fff);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            padding: 1rem;
+            text-align: left;
+            font-family: 'Roboto Slab', serif;
+        }
+        
+        td {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-btn:hover {
+            background: #9a0007;
+            transform: translateX(-5px);
+        }
+        
+        .nav-btn.next:hover {
+            transform: translateX(5px);
+        }
+        
+        .nav-btn.next {
+            margin-left: auto;
+        }
+        
+        .year-badge {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+        
+        .conclusion-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .conclusion-box h3 {
+            color: var(--primary-color);
+            border-bottom: none;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="main-title">
+                <i class="fas fa-landmark"></i>
+                СОВЕТСКАЯ РОССИЯ
+            </h1>
+            <p class="subtitle">Исследование коррупционных преступлений в советский период</p>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
+                <li><a href="introduction.html"><i class="fas fa-file-alt"></i> Введение</a></li>
+                <li><a href="subject.html" class="active"><i class="fas fa-user-tag"></i> Субъект преступления</a></li>
+                <li><a href="object.html"><i class="fas fa-bullseye"></i> Объект преступления</a></li>
+                <li><a href="accomplices.html"><i class="fas fa-users"></i> Соучастники</a></li>
+                <li><a href="causes.html"><i class="fas fa-search"></i> Причины коррупции</a></li>
+                <li><a href="classification.html"><i class="fas fa-list-ol"></i> Классификация</a></li>
+                <li><a href="experience.html"><i class="fas fa-balance-scale"></i> Правовое регулирование</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">
+                <i class="fas fa-user-tag"></i>
+                Субъект коррупционного преступления
+            </h1>
+            <p>Эволюция понятия «должностное лицо» в советском законодательстве</p>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="content-section">
+                <h2><i class="fas fa-user-shield"></i> Кто считался субъектом?</h2>
+                
+                <p>Субъектом коррупционных преступлений в советской России признавалось <strong>должностное лицо</strong> — то есть лицо, наделенное распорядительными, административными или иными публичными полномочиями.</p>
+                
+                <h3><i class="fas fa-exchange-alt"></i> Эволюция понятия «должностное лицо»</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="15%">Этап</th>
+                            <th width="25%">Нормативно-правовой акт</th>
+                            <th width="60%">Определение и особенности</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="year-badge">1918 г.</span></td>
+                            <td>Декрет СНК РСФСР от 8 мая 1918 г. «О взяточничестве»</td>
+                            <td>
+                                <p><strong>Должностными лицами считались все, кто состоял на государственной или общественной службе:</strong> от центральных чиновников до членов фабзавкомов, профсоюзов, кооперативов.</p>
+                                <p>Главным критерием было наличие <strong>хотя бы минимальных властных или распорядительных полномочий</strong>.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="year-badge">1921 г.</span></td>
+                            <td>Декрет СНК РСФСР от 16 августа 1921 г. «О борьбе со взяточничеством»</td>
+                            <td>
+                                <p>К ответственности привлекались лица, состоявшие на <strong>государственной, профессиональной или общественной службе</strong>.</p>
+                                <p>Подчеркивалось: <strong>формальная принадлежность к госаппарату не обязательна</strong> — важно выполнение публичных функций.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="year-badge">1922 г.</span></td>
+                            <td>Уголовный кодекс РСФСР 1922 г. (примечание к ст. 105)</td>
+                            <td>
+                                <p>Должностное лицо — <strong>любой, кто занимал постоянную или временную должность в госучреждениях, предприятиях или организациях, наделенных законом конкретными правами и обязанностями</strong>, включая органы местного самоуправления.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="year-badge">1922 г.</span></td>
+                            <td>Циркуляр Верховного Трибунала от 25 августа 1922 г. №135</td>
+                            <td>
+                                <p>Введено разграничение: <strong>не всякий служащий — должностное лицо</strong>.</p>
+                                <p>Им признавался <strong>только тот, кто обладал значительными распорядительными полномочиями, осуществлял функции управления и нес реальную ответственность за решения</strong>.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="year-badge">1926 г.</span></td>
+                            <td>Уголовный кодекс РСФСР 1926 г. (примечание к ст. 109)</td>
+                            <td>
+                                <p>Должностное лицо — <strong>гражданин, занимающий пост в госучреждениях, на предприятиях или в любых организациях, которым законом вменялись обязанности по выполнению хозяйственных, административных, профессиональных или иных общественно-государственных функций</strong>.</p>
+                                <p>Форма собственности не имела значения.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="year-badge">1934 г.</span></td>
+                            <td>Постановление СНК СССР и ЦК ВКП(б)</td>
+                            <td>
+                                <p>Подтвержден подход: субъект преступления — <strong>любое физическое лицо старше 16 лет</strong>, совершившее деяние, предусмотренное законом, <strong>независимо от гражданства, пола и принадлежности к структуре</strong>.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="conclusion-box">
+                    <h3><i class="fas fa-chart-line"></i> Основная тенденция эволюции</h3>
+                    <p><strong>Таким образом,</strong> понятие «должностное лицо» эволюционировало <strong>от формального признака (работа на государство) к функциональному (осуществление публичных полномочий, закреплённых законом)</strong>.</p>
+                    <p>Это отражало постепенное формирование более четких и профессиональных критериев для определения субъекта коррупционных преступлений в советской правовой системе.</p>
+                </div>
+                
+                <h3><i class="fas fa-clipboard-check"></i> Ключевые характеристики субъекта</h3>
+                
+                <div class="highlight-box">
+                    <p><strong>К 1960-м годам сложилась следующая система признаков субъекта коррупционного преступления:</strong></p>
+                    <ul>
+                        <li>Наличие государственной, общественной или профессиональной должности</li>
+                        <li>Обладание распорядительными или административными полномочиями</li>
+                        <li>Выполнение функций, закрепленных законом или нормативными актами</li>
+                        <li>Возраст не менее 16 лет (общий уголовный возраст ответственности)</li>
+                        <li>Вменяемость (способность осознавать свои действия)</li>
+                    </ul>
+                </div>
+                
+                <p>Эволюция подхода к субъекту преступления демонстрирует постепенное движение от революционной риторики к более формализованным юридическим определениям, хотя идеологическая составляющая всегда оставалась важным элементом советской правовой системы.</p>
+            </div>
+
+            <div class="navigation-buttons">
+                <a href="introduction.html" class="nav-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Назад: Введение
+                </a>
+                <a href="object.html" class="nav-btn next">
+                    Вперёд: Объект преступления
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3><i class="fas fa-graduation-cap"></i> Дипломный проект</h3>
+                    <p>Исследование коррупционных преступлений в Советской России</p>
+                    <p>© 2024 Историко-юридический факультет</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Быстрые ссылки</h4>
+                    <ul>
+                        <li><a href="introduction.html">Введение</a></li>
+                        <li><a href="classification.html">Классификация</a></li>
+                        <li><a href="experience.html">Правовое регулирование</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Сайт создан для учебных целей. Все материалы носят исследовательский характер.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

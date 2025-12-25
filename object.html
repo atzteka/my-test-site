@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Объект преступления - Советская Россия</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            background: linear-gradient(rgba(33, 33, 33, 0.9), rgba(33, 33, 33, 0.95)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect width="100" height="100" fill="%23212121"/><path d="M0,20 Q50,0 100,20 L100,80 Q50,100 0,80 Z" fill="%23b71c1c" opacity="0.3"/></svg>');
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title {
+            font-family: 'Roboto Slab', serif;
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .content-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid #eee;
+            font-family: 'Roboto Slab', serif;
+        }
+        
+        .content-section h3 {
+            color: var(--secondary-color);
+            margin: 1.5rem 0 1rem;
+            font-family: 'Roboto Slab', serif;
+        }
+        
+        .content-section p {
+            margin-bottom: 1.2rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            padding: 1rem;
+            text-align: left;
+            font-family: 'Roboto Slab', serif;
+        }
+        
+        td {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-btn:hover {
+            background: #9a0007;
+            transform: translateX(-5px);
+        }
+        
+        .nav-btn.next:hover {
+            transform: translateX(5px);
+        }
+        
+        .nav-btn.next {
+            margin-left: auto;
+        }
+        
+        .year-badge {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(to right, #f8f9fa, #fff);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .article-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dashed var(--primary-color);
+        }
+        
+        .article-link:hover {
+            border-bottom: 1px solid var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="main-title">
+                <i class="fas fa-landmark"></i>
+                СОВЕТСКАЯ РОССИЯ
+            </h1>
+            <p class="subtitle">Исследование коррупционных преступлений в советский период</p>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
+                <li><a href="introduction.html"><i class="fas fa-file-alt"></i> Введение</a></li>
+                <li><a href="subject.html"><i class="fas fa-user-tag"></i> Субъект преступления</a></li>
+                <li><a href="object.html" class="active"><i class="fas fa-bullseye"></i> Объект преступления</a></li>
+                <li><a href="accomplices.html"><i class="fas fa-users"></i> Соучастники</a></li>
+                <li><a href="causes.html"><i class="fas fa-search"></i> Причины коррупции</a></li>
+                <li><a href="classification.html"><i class="fas fa-list-ol"></i> Классификация</a></li>
+                <li><a href="experience.html"><i class="fas fa-balance-scale"></i> Правовое регулирование</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">
+                <i class="fas fa-bullseye"></i>
+                Объект коррупционного преступления
+            </h1>
+            <p>Что охранялось законом от коррупционных посягательств</p>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="content-section">
+                <h2><i class="fas fa-shield-alt"></i> Что считалось объектом?</h2>
+                
+                <p>Объектом коррупционного преступления были <strong>охраняемые законом общественные отношения</strong>, посягательство на которые подрывало основы социалистического строя.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Важный нюанс:</strong> В раннем советском законодательстве термин «объект преступления» не использовался явно, но содержание нормативных актов позволяло выявить, какие именно общественные отношения защищались от коррупционных посягательств.</p>
+                </div>
+                
+                <h3><i class="fas fa-history"></i> Эволюция представлений об объекте</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="15%">Этап</th>
+                            <th width="25%">НПА / Источник</th>
+                            <th width="60%">Формулировка объекта</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="year-badge">1918 г.</span></td>
+                            <td>Декрет СНК РСФСР от 8 мая 1918 г. «О взяточничестве»</td>
+                            <td>
+                                <p>Термин «объект преступления» <strong>не использовался</strong>, но из содержания следовало: преступление направлено против <strong>интересов государства и социалистического порядка</strong>.</p>
+                                <p>Особое внимание — <strong>социальной справедливости</strong>: ужесточенное наказание для «имущих классов», использующих взятку для сохранения привилегий.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="year-badge">1922 г.</span></td>
+                            <td>Уголовный кодекс РСФСР 1922 г.</td>
+                            <td>
+                                <p>Термин «объект» <strong>в тексте отсутствовал</strong>, но анализ статей показывает, что охранялись: <strong>общественные отношения в сфере нормального функционирования госвласти, госслужбы, интересов государства и прав граждан</strong>.<sup><a href="#ref3">[3]</a></sup></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="year-badge">1922 г.</span><br>Конкретизация по статьям</td>
+                            <td>Уголовный кодекс РСФСР 1922 г.</td>
+                            <td>
+                                <p><strong>Конкретные объекты по статьям:</strong></p>
+                                <ul>
+                                    <li><a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank" class="article-link">ст. 105</a> (злоупотребление властью) — нарушение <strong>работы учреждения/предприятия или общественного порядка</strong>; посягательство на <strong>частные интересы граждан</strong></li>
+                                    <li><a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank" class="article-link">ст. 109</a> (дискредитирование власти) — подрыв <strong>достоинства и авторитета государственной власти</strong></li>
+                                    <li><a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank" class="article-link">ст. 111</a> (неправосудный приговор) — нарушение <strong>правильной работы правосудия</strong></li>
+                                    <li><a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank" class="article-link">ст. 112</a> (незаконное задержание) — нарушение <strong>конституционных прав и свобод граждан</strong></li>
+                                    <li><a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank" class="article-link">ст. 110, 113</a> (хищения) — посягательство на <strong>государственную и общественную собственность, финансовые интересы государства</strong></li>
+                                    <li><a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank" class="article-link">ст. 114, 116</a> (взяточничество, подлог) — нарушение <strong>принципов беспристрастности, честности и законности в госслужбе</strong></li>
+                                    <li><a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank" class="article-link">ст. 117-118</a> (разглашение, непредставление сведений) — подрыв <strong>интересов государственного управления и информационной безопасности</strong></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="year-badge">1958 г.</span></td>
+                            <td>Основы уголовного законодательства СССР и союзных республик (ст. 7)</td>
+                            <td>
+                                <p>Впервые на законодательном уровне: преступление — это деяние, <strong>«посягающее на советский общественный или государственный строй, социалистическую систему хозяйства, социалистическую собственность, личность, политические, трудовые, имущественные и другие права граждан»</strong>.</p>
+                                <p>Хотя термин «объект» не использовался, перечисленное фактически <strong>являлось официальным перечнем объектов преступления</strong>.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="year-badge">1960 г.</span></td>
+                            <td>Уголовный кодекс РСФСР (ст. 1)</td>
+                            <td>
+                                <p>Воспроизведена формулировка Основ 1958 г.: охраняются <strong>советский строй, социалистическая собственность, личность, права граждан и весь социалистический правопорядок</strong>.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3><i class="fas fa-layer-group"></i> Иерархия объектов защиты</h3>
+                
+                <p>К 1960 году сложилась четкая иерархия объектов уголовно-правовой защиты от коррупционных посягательств:</p>
+                
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                    <ol style="margin: 0; padding-left: 1.5rem;">
+                        <li><strong>Советский общественный и государственный строй</strong> (высший приоритет)</li>
+                        <li><strong>Социалистическая система хозяйства</strong></li>
+                        <li><strong>Социалистическая собственность</strong></li>
+                        <li><strong>Личность и права граждан</strong></li>
+                        <li><strong>Нормальное функционирование государственного аппарата</strong></li>
+                        <li><strong>Авторитет государственной власти</strong></li>
+                        <li><strong>Принципы законности и справедливости в государственной службе</strong></li>
+                    </ol>
+                </div>
+                
+                <h3><i class="fas fa-lightbulb"></i> Особенности советского подхода</h3>
+                
+                <div class="highlight-box">
+                    <p><strong>Идеологический характер:</strong> Защита социалистического строя и государственной собственности всегда имела приоритет над защитой прав отдельных граждан.</p>
+                    <p><strong>Коллективистский подход:</strong> Акцент на защите общественных и государственных интересов, а не индивидуальных прав.</p>
+                    <p><strong>Эволюция от революционной риторики к формализации:</strong> От эмоциональных формулировок раннего советского периода к более четким юридическим определениям в поздний период.</p>
+                </div>
+                
+                <p id="ref3" style="font-size: 0.9rem; color: #666; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                    [3] Уголовный кодекс РСФСР 1922 года. Полный текст доступен по ссылке: <a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank">https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22</a>
+                </p>
+            </div>
+
+            <div class="navigation-buttons">
+                <a href="subject.html" class="nav-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Назад: Субъект преступления
+                </a>
+                <a href="accomplices.html" class="nav-btn next">
+                    Вперёд: Соучастники
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3><i class="fas fa-graduation-cap"></i> Дипломный проект</h3>
+                    <p>Исследование коррупционных преступлений в Советской России</p>
+                    <p>© 2024 Историко-юридический факультет</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Быстрые ссылки</h4>
+                    <ul>
+                        <li><a href="introduction.html">Введение</a></li>
+                        <li><a href="classification.html">Классификация</a></li>
+                        <li><a href="experience.html">Правовое регулирование</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Сайт создан для учебных целей. Все материалы носят исследовательский характер.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

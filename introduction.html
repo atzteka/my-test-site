@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Введение - Советская Россия</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            background: linear-gradient(rgba(33, 33, 33, 0.9), rgba(33, 33, 33, 0.95)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect width="100" height="100" fill="%23212121"/><path d="M0,20 Q50,0 100,20 L100,80 Q50,100 0,80 Z" fill="%23b71c1c" opacity="0.3"/></svg>');
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title {
+            font-family: 'Roboto Slab', serif;
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .content-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid #eee;
+            font-family: 'Roboto Slab', serif;
+        }
+        
+        .content-section h3 {
+            color: var(--secondary-color);
+            margin: 1.5rem 0 1rem;
+            font-family: 'Roboto Slab', serif;
+        }
+        
+        .content-section p {
+            margin-bottom: 1.2rem;
+        }
+        
+        .content-section ul, .content-section ol {
+            margin: 1rem 0 1.5rem 2rem;
+        }
+        
+        .content-section li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(to right, #f8f9fa, #fff);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .highlight-box strong {
+            color: var(--primary-color);
+        }
+        
+        .reference {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-btn:hover {
+            background: #9a0007;
+            transform: translateX(-5px);
+        }
+        
+        .nav-btn.next:hover {
+            transform: translateX(5px);
+        }
+        
+        .nav-btn.next {
+            margin-left: auto;
+        }
+        
+        .footnote {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .footnote h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            padding: 1rem;
+            text-align: left;
+            font-family: 'Roboto Slab', serif;
+        }
+        
+        td {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .year-badge {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="main-title">
+                <i class="fas fa-landmark"></i>
+                СОВЕТСКАЯ РОССИЯ
+            </h1>
+            <p class="subtitle">Исследование коррупционных преступлений в советский период</p>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
+                <li><a href="introduction.html" class="active"><i class="fas fa-file-alt"></i> Введение</a></li>
+                <li><a href="subject.html"><i class="fas fa-user-tag"></i> Субъект преступления</a></li>
+                <li><a href="object.html"><i class="fas fa-bullseye"></i> Объект преступления</a></li>
+                <li><a href="accomplices.html"><i class="fas fa-users"></i> Соучастники</a></li>
+                <li><a href="causes.html"><i class="fas fa-search"></i> Причины коррупции</a></li>
+                <li><a href="classification.html"><i class="fas fa-list-ol"></i> Классификация</a></li>
+                <li><a href="experience.html"><i class="fas fa-balance-scale"></i> Правовое регулирование</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">
+                <i class="fas fa-file-alt"></i>
+                Введение
+            </h1>
+            <p>Исторический и правовой анализ коррупции в СССР (1917-1991 гг.)</p>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="content-section">
+                <h2><i class="fas fa-history"></i> КОРРУПЦИЯ В СОВЕТСКОЙ РОССИИ</h2>
+                
+                <p>В советской России термин «коррупция» как единое законодательное понятие отсутствовал на протяжении всего периода 1917-1991 годов. Власть видела в нем буржуазный пережиток, несовместимый с социализмом, и отрицала коррупцию как системное явление, трактуя её как отдельные нарушения дисциплины или «пережитки капитализма». Вместо него использовались идеологически окрашенные категории: «взяточничество», «злоупотребление служебным положением», «хищение социалистической собственности», «служебный подлог» или «экономическая контрреволюция».</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Ключевой парадокс:</strong> Несмотря на официальный запрет, термин «коррупция» появлялся в юридической науке советского периода, но игнорировался в законодательстве и пропаганде.</p>
+                </div>
+                
+                <h3><i class="fas fa-book"></i> Научное использование термина</h3>
+                
+                <ul>
+                    <li><span class="year-badge">1913</span> Советский юрист <strong>А.Я. Эстрин</strong> использовал слово «коррупция» в своей монографии «Взяточничество».</li>
+                    <li><span class="year-badge">1928</span> В книге «Должностные преступления» он дал четкое определение. Под коррупцией понималась подкупность и продажность как государственных служащих, так и общественно-политических фигур в самом широком смысле.</li>
+                </ul>
+                
+                <h3><i class="fas fa-gavel"></i> Официальное признание</h3>
+                
+                <p>Термин <strong>«коррупция» впервые появился в официальном документе СССР только в 1989 году</strong> в <strong>Постановлении Съезда народных депутатов СССР от 23 декабря 1989 года «Об усилении борьбы с организованной преступностью»</strong>.<sup><a href="#ref1">[1]</a></sup></p>
+                
+                <p>В документе использовались формулировки:</p>
+                
+                <ul>
+                    <li>«происходит сращивание преступных групп с <strong>коррумпированными должностными лицами</strong>»;</li>
+                    <li>«борьба с ... <strong>коррупцией</strong>, бесхозяйственностью, расточительством...»</li>
+                </ul>
+                
+                <p>Это стало <strong>признанием коррупции как системного явления</strong>, хотя и в контексте борьбы с организованной преступностью.</p>
+                
+                <h3><i class="fas fa-balance-scale-right"></i> Современное определение</h3>
+                
+                <p>Первое юридическое определение появилось только в <strong>Федеральном законе от 25 декабря 2008 года № 273-ФЗ «О противодействии коррупции»</strong>:<sup><a href="#ref2">[2]</a></sup></p>
+                
+                <div class="highlight-box">
+                    <p><strong>Коррупция</strong> — это противоправное использование лицом своего служебного положения вопреки законным интересам общества и государства с целью получения имущественной или иной выгоды как для себя лично, так и в интересах третьих лиц, включая случаи, когда такое лицо не являлось должностным.</p>
+                </div>
+                
+                <p>Таким образом, законодательное определение подчёркивало три ключевых признака:</p>
+                
+                <ol>
+                    <li>Выгода исключительно имущественного или иного материального характера;</li>
+                    <li>Возможность получения выгоды не только лично коррупционером, но и для других лиц;</li>
+                    <li>Субъект преступления может быть не только должностным лицом, но и любым физическим или юридическим лицом.</li>
+                </ol>
+                
+                <p><strong>Разница с 2008 годом</strong> в том, что в 1989 году термин упоминался впервые в официальном документе, но без закрепления как правового понятия — он не имел юридической силы, не определял состав преступления и не менял подход к преследованиям.</p>
+                
+                <div class="footnote">
+                    <h4><i class="fas fa-bookmark"></i> Примечания</h4>
+                    <p id="ref1">[1] Постановление Съезда народных депутатов СССР от 23 декабря 1989 года «Об усилении борьбы с организованной преступностью». С. 246-4 — 246-7. <a href="https://rusneb.ru/catalog/000202_000006_18eb9452-6bf7-4e35-a55f-c3cac401bd0a/" target="_blank">Источник</a></p>
+                    <p id="ref2">[2] Федеральный закон от 25 декабря 2008 года № 273-ФЗ «О противодействии коррупции». <a href="https://www.consultant.ru/document/cons_doc_LAW_82959/bbbd4641125b222beaf7483e16c594116ed2d9a1/" target="_blank">Источник</a></p>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <a href="index.html" class="nav-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    На главную
+                </a>
+                <a href="subject.html" class="nav-btn next">
+                    Субъект преступления
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3><i class="fas fa-graduation-cap"></i> Дипломный проект</h3>
+                    <p>Исследование коррупционных преступлений в Советской России</p>
+                    <p>© 2024 Историко-юридический факультет</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Быстрые ссылки</h4>
+                    <ul>
+                        <li><a href="introduction.html">Введение</a></li>
+                        <li><a href="classification.html">Классификация</a></li>
+                        <li><a href="experience.html">Правовое регулирование</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Сайт создан для учебных целей. Все материалы носят исследовательский характер.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
