@@ -1,1 +1,1067 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Антикоррупционный Doodle Jump</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #87CEEB, #98FB98);
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        canvas {
+            border: 2px solid #333;
+            background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 50%, #98FB98 100%);
+            /* Здесь можно добавить фоновые изображения позже */
+        }
+        #ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #333;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+        }
+        #gameOver, #winScreen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+        #questionModal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255,255,255,0.7); /* Более прозрачный для видимости платформ */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            text-align: center;
+            display: none;
+            max-width: 300px; /* Меньше размер для видимости фона */
+            font-size: 16px;
+        }
+        #questionModal button {
+            display: block;
+            width: 90%;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 14px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #questionModal button:hover {
+            background: #45a049;
+        }
+        #questionModal button.wrong {
+            background: #f44336 !important;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="500" height="1125"></canvas>
+    <div id="ui">
+        Верные ответы: <span id="score">0</span>
+    </div>
+    <div id="gameOver">
+        <h2>Игра окончена!</h2>
+        <p>Верных ответов: <span id="finalScore">0</span></p>
+        <button onclick="restartGame()">Начать заново</button>
+    </div>
+    <div id="winScreen">
+        <h2>Игра пройдена!</h2>
+        <p>Поздравляем!</p>
+        <button onclick="restartGame()">Начать заново</button>
+    </div>
+    <div id="questionModal">
+        <div id="questionText"></div>
+        <div id="answers"></div>
+    </div>
 
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('score');
+        const gameOverEl = document.getElementById('gameOver');
+        const finalScoreEl = document.getElementById('finalScore');
+        const winScreenEl = document.getElementById('winScreen');
+        const questionModal = document.getElementById('questionModal');
+        const questionTextEl = document.getElementById('questionText');
+        const answersEl = document.getElementById('answers');
+
+        // Логический размер игры (совпадает с атрибутами width/height канваса)
+        const LOGICAL_WIDTH = 500;
+        const LOGICAL_HEIGHT = 1125;
+
+        // Масштабирование канваса под размер окна браузера с сохранением пропорций
+        function resizeCanvasToWindow() {
+            const scale = Math.min(
+                window.innerWidth / LOGICAL_WIDTH,
+                window.innerHeight / LOGICAL_HEIGHT
+            );
+            const displayWidth = LOGICAL_WIDTH * scale;
+            const displayHeight = LOGICAL_HEIGHT * scale;
+            canvas.style.width = displayWidth + 'px';
+            canvas.style.height = displayHeight + 'px';
+        }
+
+        window.addEventListener('resize', resizeCanvasToWindow);
+        // Первоначальное подгонка под окно
+        resizeCanvasToWindow();
+
+        // Спрайт персонажа
+        const playerSprite = new Image();
+        let playerSpriteLoaded = false;
+        playerSprite.src = '123.png';
+        playerSprite.onload = () => {
+            playerSpriteLoaded = true;
+        };
+
+        // Игровые константы (масштаб +25%)
+        const GRAVITY = 0.5;
+        const JUMP_FORCE = -18;   // усиленный прыжок под увеличенный масштаб
+        const SPRING_JUMP = -31;  // усиленный прыжок от пружины
+        const PLAYER_RADIUS = 25;
+        const PLATFORM_WIDTH = 100;
+        const PLATFORM_HEIGHT = 19;
+        const PLATFORM_GAP_MIN = 100;
+        const PLATFORM_GAP_MAX = 175;
+        const ANIM_DURATION = 60; // Кадры для анимации
+        const BROWN_DISAPPEAR_TIME = 120; // ~2 секунды при 60fps
+        const GROUND_HEIGHT = 40; // Высота полосы земли внизу
+
+        // Вопросы
+        const questions = [
+            {
+                text: 'Впервые в научный оборот термин «коррупция» ввел:',
+                answers: [
+                    '1) А.Я. Эстрин',
+                    '2) Ф.Э. Дзержинский',
+                    '3) В.И. Ленин',
+                    ''
+                ],
+                correct: 0
+            },
+            {
+                text: '8 мая 1918 года СНК РСФСР был издан:',
+                answers: [
+                    '1) Декрет СНК РСФСР «О спекуляции»',
+                    '2) Декрет СНК РСФСР «О взяточничестве»',
+                    '3) Декрет СНК РСФСР «О борьбе со взяточничеством»',
+                    '4) Декрет СНК РСФСР «О борьбе со спекуляцией, хищениями в государственных складах, подлогами и другими злоупотреблениями по должности в хозяйственных и распределительных органах»'
+                ],
+                correct: 1
+            },
+            {
+                text: 'В советский период вместо термина «коррупция» использовались формулировки:',
+                answers: [
+                    '1) Злоупотребление служебным положением, взяточничество',
+                    '2) Лихоимство, мздоимство',
+                    '3) Взяточничество, мздоимство',
+                    '4) Служебное преступление, посул'
+                ],
+                correct: 0
+            },
+            {
+                text: 'Декрет СНК РСФСР от 8 мая 1918 года «О взяточничестве» устанавливал:',
+                answers: [
+                    '1) Одинаковую уголовную ответственность для взяткодателей, взяткополучателей, подстрекателей, пособников, всех прикосновенных к даче взятки, без различия между соучастием в получении и в даче взятки;',
+                    '2) Различную уголовную ответственность для взяткодателей, взяткополучателей, подстрекателей, пособников, всех прикосновенных к даче взятки, с различием между соучастием в получении и в даче взятки;'
+                ],
+                correct: 0
+            },
+            {
+                text: 'Объектом коррупционного преступления являлись:',
+                answers: [
+                    '1) Государственные интересы (все, что обеспечивало мощь и функционирование государства)',
+                    '2) Конкретные служебные действия должностных лиц',
+                    '3) Целостность государственного порядка',
+                    '4) Общественный и государственный строй, социалистическая собственность, личность и права граждан, весь социалистический правопорядок'
+                ],
+                correct: 3
+            },
+            {
+                text: 'Какое из перечисленных утверждений наиболее точно отражает суть понятия «экономическая контрреволюция» в советском праве 1920 – 1930-х гг.?',
+                answers: [
+                    '1) Легальное изъятие имущества у буржуазии в целях укрепления социалистической экономики',
+                    '2) Любое хищение или растрата государственной (народной) собственности расценивалось как враждебный акт против советского строя',
+                    '3) Добровольный отказ граждан от частной собственности в пользу коллективной'
+                ],
+                correct: 1
+            },
+            {
+                text: 'Что являлось достаточным основанием для квалификации преступления как «экономической контрреволюции» в СССР?',
+                answers: [
+                    '1) Факт совершения преступления против личности представителя власти',
+                    '2) Установление, что действия заведомо могли подорвать хозяйственную мощь советского государства, независимо от наличия политического умысла',
+                    '3) Признание обвиняемым своей враждебной цели по свержению советской власти'
+                ],
+                correct: 1
+            },
+            {
+                text: 'Дифференциация по размеру взятки появилась в:',
+                answers: [
+                    '1) 1918 г.',
+                    '2) 1922 г.',
+                    '3) 1960 г.',
+                    '4) 1996 г.'
+                ],
+                correct: 3
+            },
+            {
+                text: 'Чем отличалось советское понимание взяточничества от дореволюционного подхода к этому преступлению?',
+                answers: [
+                    '1) В советском праве взятка считалась преступлением только в случае, если она была передана до совершения служебного действия',
+                    '2) Советское законодательство признавало преступными как взятку-подкуп, так и взятку-вознаграждение, не проводя между ними юридического различия',
+                    '3) В СССР уголовная ответственность наступала лишь за взятки, связанные с конкретными, заранее оговоренными решениями должностного лица',
+                    '4) В отличие от дореволюционного права, в советский период взятка-вознаграждение считалась менее опасной и не влекла уголовной ответственности'
+                ],
+                correct: 1
+            },
+            {
+                text: 'Какой подход к квалификации взяточничества применялся в советском уголовном праве в отличие от дореволюционной традиции?',
+                answers: [
+                    '1) Преступлением признавалось лишь получение вознаграждения за заведомо незаконное решение',
+                    '2) Уголовная ответственность наступала только в случае, если должностное лицо нарушило служебный долг, приняв решение вопреки закону',
+                    '3) Сам факт получения должностным лицом вознаграждения за действия, связанные со служебным положением, квалифицировался как преступление независимо от того, было ли принятое решение правомерным или нет',
+                    '4) Взятка считалась преступлением только при наличии доказательств корыстного умысла и предварительного сговора'
+                ],
+                correct: 2
+            },
+            {
+                text: 'Почему крупная спекуляция в советский период могла квалифицироваться как коррупционное преступление?',
+                answers: [
+                    '1) Потому что спекулянты систематически взятками подкупали работников торговли и снабжения',
+                    '2) Потому что любая коммерческая деятельность, не согласованная с профсоюзами, считалась экономическим саботажем',
+                    '3) Потому что крупная спекуляция расценивалась как посягательство на государственную монополию, на распределение ресурсов, а следовательно, как угроза социалистической собственности и основам строя, особенно, когда она затрагивала товары, находившиеся под государственным контролем'
+                ],
+                correct: 2
+            },
+            {
+                text: 'Первым советским нормативным актом, в котором спекуляция получила юридическое определение, стал:',
+                answers: [
+                    '1) Декрет СНК РСФСР от 8 мая 1918 года «О взяточничестве»',
+                    '2) Декрет СНК РСФСР от 22 июля 1918 года «О спекуляции»',
+                    '3) Декрет СНК РСФСР от 21 октября 1919 года «О борьбе со спекуляцией, хищениями в государственных складах, подлогами и другими злоупотреблениями по должности в хозяйственных и распределительных органах»'
+                ],
+                correct: 1
+            },
+            {
+                text: 'В советском уголовном законодательстве фальсификация отчетов (приписки) получила первое нормативное оформление в:',
+                answers: [
+                    '1) Декрете СНК РСФСР от 8 мая 1918 года «О взяточничестве»',
+                    '2) Декрете СНК РСФСР от 16 августа 1921 года «О борьбе со взяточничеством»',
+                    '3) Уголовном кодексе РСФСР 1922 года',
+                    '4) Уголовном кодексе РСФСР 1926 года'
+                ],
+                correct: 2
+            },
+            {
+                text: 'При каком условии искажение служебных данных квалифицировалось как преступление по статье 120 Уголовного кодекса РСФСР 1926 года?',
+                answers: [
+                    '1) При любом искажении данных, независимо от мотивов должностного лица',
+                    '2) Только в случае, если искажение повлекло тяжкие последствия для государственного учреждения',
+                    '3) Только при наличии корыстного умысла, то есть, когда лицо фальсифицировало данные с целью получения личной выгоды (материальной, карьерной или иной)',
+                    '4) При наличии доказательств сговора с другими должностными лицами'
+                ],
+                correct: 2
+            },
+            {
+                text: 'Какое значение имел Декрет СНК РСФСР от 27 июля 1918 года «Об ограничении совместной службы родственников в Советских учреждениях» для борьбы с коррупцией?',
+                answers: [
+                    '1) Он впервые разрешил назначение родственников на ответственные должности при условии их профессиональной квалификации',
+                    '2) Он ввел уголовную ответственность за любую форму семейных связей между сотрудниками государственных учреждений.',
+                    '3) Он стал первым нормативным актом советской власти, официально зафиксировавшим проблему совместной службы родственников как источник злоупотреблений и несправедливого распределения должностей и ресурсов на основе личных, а не профессиональных связей, и запретил совместную службу родственников',
+                    '4) Он отменил все прежние дореволюционные нормы о служебной этике и ввел новую систему аттестации кадров'
+                ],
+                correct: 2
+            },
+            {
+                text: 'Какова была основная цель создания комиссии по борьбе со взяточничеством при Совете труда и обороны (СТО) и премирования информаторов в рамках борьбы со взяточничеством в 1922 году?',
+                answers: [
+                    '1) Снизить нагрузку на судебные органы за счет массового привлечения граждан к правоприменению',
+                    '2) Усилить контроль над чиновниками за счет поощрения граждан к сообщениям о коррупционных проявлениях, тем самым формируя систему общественного надзора и стимулируя раскрытие преступлений',
+                    '3) Обеспечить дополнительные источники дохода для малоимущих слоев населения через государственные премии',
+                    '4) Заменить профессиональные правоохранительные органы системой народного контроля'
+                ],
+                correct: 1
+            },
+            {
+                text: 'Кто возглавил специальную правительственную комиссию по борьбе со взяточничеством, утвержденную при Совете труда и обороны (СТО) в сентябре 1922 года?',
+                answers: [
+                    '1) В.И. Ленин',
+                    '2) Н.И. Бухарин',
+                    '3) Ф.Э. Дзержинский',
+                    '4) Л.Д. Троцкий'
+                ],
+                correct: 2
+            },
+            {
+                text: '21 декабря 1922 года было издано Постановление СНК РСФСР «Временные правила о службе в государственных учреждениях и предприятиях». Какова цель?',
+                answers: [
+                    '1) Снизить государственные расходы на содержание чиновников за счет запрета им заниматься частной деятельностью',
+                    '2) Обеспечить полную изоляцию госслужащих от экономической жизни страны в условиях военного коммунизма',
+                    '3) Предотвратить конфликт интересов и коррупционные риски, запретив госслужащим участвовать в частном бизнесе, вступать в коммерческие отношения с государством и совмещать госслужбу с работой в частных структурах'
+                ],
+                correct: 2
+            },
+            {
+                text: 'Какое важное нововведение ввел Уголовный кодекс РСФСР 1960 года в подходе к квалификации должностных преступлений?',
+                answers: [
+                    '1) Впервые ввел наказание за получение взятки в виде расстрела',
+                    '2) Сделал отягчающие последствия самостоятельным квалифицирующим признаком, перейдя к объективно-материальной модели оценки',
+                    '3) Исключил из кодекса статьи о должностных преступлениях, считая их устаревшими'
+                ],
+                correct: 1
+            },
+            {
+                text: 'Какой нормативный акт содержал статью, предусматривающую обстоятельства, исключающие уголовную ответственность взяткодателей?',
+                answers: [
+                    '1) Декрет СНК РСФСР от 8 мая 1918 года «О взяточничестве»',
+                    '2) Уголовный кодекс РСФСР 1926 года',
+                    '3) Уголовный кодекс РСФСР 1960 года',
+                    '4) Все'
+                ],
+                correct: 3
+            }
+        ];
+
+        // Фон: вертикальный столбик PNG-картинок
+        const backgroundImageFiles = [
+            'Picture1.png',
+            'Picture2.png',
+            'Picture3.png',
+            'Picture4.png',
+            'Picture5.png',
+            'Picture6.png',
+            'Picture7.png',
+            'Picture8.png',
+            'Picture9.png',
+            'Picture10.png',
+            'Picture11.png',
+            'Picture12.png',
+            'Picture13.png'
+        ];
+
+        let backgroundImages = [];
+        let backgroundHeights = [];
+        let backgroundOrder = [];
+        let backgroundReady = false;
+
+        function shuffleBackgroundOrder() {
+            backgroundOrder = backgroundImageFiles.map((_, i) => i);
+            for (let i = backgroundOrder.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const tmp = backgroundOrder[i];
+                backgroundOrder[i] = backgroundOrder[j];
+                backgroundOrder[j] = tmp;
+            }
+        }
+
+        function loadBackgroundImages() {
+            backgroundImages = [];
+            backgroundHeights = new Array(backgroundImageFiles.length).fill(canvas.height);
+            let loaded = 0;
+            backgroundReady = false;
+            backgroundImageFiles.forEach((src, index) => {
+                const img = new Image();
+                img.src = src;
+                img.onload = () => {
+                    // Масштабируем по ширине канваса, пропорционально высоте
+                    if (img.width > 0) {
+                        const scale = canvas.width / img.width;
+                        backgroundHeights[index] = img.height * scale;
+                    } else {
+                        backgroundHeights[index] = canvas.height;
+                    }
+                    loaded++;
+                    if (loaded === backgroundImageFiles.length) {
+                        backgroundReady = true;
+                    }
+                };
+                backgroundImages[index] = img;
+            });
+            shuffleBackgroundOrder();
+        }
+
+        function drawBackground() {
+            if (!backgroundReady) return;
+
+            // Общая высота одного "цикла" столбика фона
+            const totalHeight = backgroundHeights.reduce((sum, h) => sum + h, 0);
+            if (totalHeight <= 0) return;
+
+            // Диапазон по высоте, который нужно покрыть тайлингом
+            const startBase = Math.floor((cameraY - canvas.height) / totalHeight) * totalHeight;
+            const endBase = cameraY + canvas.height + totalHeight;
+
+            ctx.save();
+            // Делаем фон чуть тусклее, не затрагивая платформы и персонажа
+            ctx.globalAlpha = 0.6;
+
+            for (let base = startBase; base < endBase; base += totalHeight) {
+                let yAcc = 0;
+                for (let k = 0; k < backgroundOrder.length; k++) {
+                    const idx = backgroundOrder[k];
+                    const img = backgroundImages[idx];
+                    const h = backgroundHeights[idx];
+                    const worldY = base + yAcc;
+                    const screenY = worldY - cameraY;
+
+                    if (screenY > canvas.height || screenY + h < 0) {
+                        yAcc += h;
+                        continue;
+                    }
+                    if (img && img.complete) {
+                        ctx.drawImage(img, 0, screenY, canvas.width, h);
+                    }
+                    yAcc += h;
+                }
+            }
+
+            ctx.restore();
+        }
+
+        // Отрисовка земли
+        function drawGround() {
+            ctx.save();
+            ctx.translate(ground.x, ground.y);
+
+            // Земля
+            ctx.fillStyle = '#8B4513';
+            ctx.fillRect(0, 0, ground.width, ground.height);
+
+            // Трава сверху
+            ctx.fillStyle = '#228B22';
+            ctx.fillRect(0, -10, ground.width, 10);
+
+            ctx.restore();
+        }
+
+        // Звуки
+        let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playJumpSound() {
+            let oscillator = audioCtx.createOscillator();
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
+            oscillator.connect(audioCtx.destination);
+            oscillator.start();
+            setTimeout(() => oscillator.stop(), 100);
+        }
+
+        function playFallSound() {
+            let oscillator = audioCtx.createOscillator();
+            oscillator.type = 'sawtooth';
+            oscillator.frequency.setValueAtTime(220, audioCtx.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.5);
+            oscillator.connect(audioCtx.destination);
+            oscillator.start();
+            setTimeout(() => oscillator.stop(), 500);
+        }
+
+        // Игровое состояние
+        let gameState = {
+            running: true,
+            correctAnswers: 0
+        };
+
+        let ground = {
+            x: 0,
+            y: canvas.height - GROUND_HEIGHT,
+            width: canvas.width,
+            height: GROUND_HEIGHT
+        };
+
+        let player = {
+            x: canvas.width / 2,
+            y: ground.y - PLAYER_RADIUS,
+            vx: 0,
+            vy: 0,
+            onGround: true
+        };
+
+        let platforms = [];
+        let keys = {};
+
+        let currentQuestionIndex = 0;
+        let currentPlatform = null;
+        let topGreenPlatform = null;
+
+        let animating = false;
+        let animProgress = 0;
+        let animStartX = 0;
+        let animStartY = 0;
+        let animTargetX = 0;
+        let animTargetY = 0;
+        let animArcHeight = 0; // Высота дуги для анимации
+        let animIsFall = false; // Флаг для падения без платформы
+        let wrongStreak = 0; // Счётчик подряд неверных ответов
+        let cameraY = 0; // Смещение камеры по вертикали
+        let answeredQuestions = {}; // Запомненные правильно отвеченные вопросы
+        let lastCorrectPlatform = null; // Платформа, на которой последний раз был дан верный ответ
+        let visitedOtherPlatformAfterCorrect = false; // Флаг: игрок приземлился на другую платформу после верного ответа
+
+        // Генерация фиксированных платформ
+        function generateFixedPlatforms() {
+            platforms = [];
+            // Начинаем генерацию чуть выше земли, чтобы первая платформа была над стартовой позицией игрока
+            let y = ground.y - 50;
+
+            // Уникальные индексы вопросов по количеству вопросов
+            let questionAssignments = Array.from({ length: questions.length }, (_, i) => i);
+            questionAssignments = questionAssignments.sort(() => Math.random() - 0.5); // Перемешать
+
+            // Количество основных платформ зависит от числа вопросов
+            const basePlatformCount = questions.length + 5;
+
+            for (let i = 0; i < basePlatformCount; i++) {
+
+                let type;
+                let questionIndex = null;
+                if (i === 0) {
+                    type = 'cyan'; // Первая - голубая платформа под игроком
+                } else {
+                    const types = ['green', 'cyan', 'brown', 'blue'];
+                    type = types[Math.floor(Math.random() * types.length)];
+                }
+
+                const x = Math.random() * (canvas.width - PLATFORM_WIDTH) + PLAYER_RADIUS;
+                platforms.push({
+                    x: x,
+                    y: y,
+                    width: PLATFORM_WIDTH,
+                    height: PLATFORM_HEIGHT,
+                    type: type,
+                    disappearTimer: null,
+                    questionIndex: questionIndex
+                });
+
+                if (type === 'brown') {
+                    const sideX1 = x - PLATFORM_WIDTH - 20;
+                    const sideX2 = x + PLATFORM_WIDTH + 20;
+                    const sideY = y + PLATFORM_GAP_MIN / 2;
+                    if (sideY < canvas.height) {
+                        if (sideX1 > PLAYER_RADIUS) {
+                            platforms.push({
+                                x: sideX1,
+                                y: sideY,
+                                width: PLATFORM_WIDTH,
+                                height: PLATFORM_HEIGHT,
+                                type: 'cyan',
+                                disappearTimer: null,
+                                questionIndex: null
+                            });
+                        }
+                        if (sideX2 < canvas.width - PLATFORM_WIDTH - PLAYER_RADIUS) {
+                            platforms.push({
+                                x: sideX2,
+                                y: sideY,
+                                width: PLATFORM_WIDTH,
+                                height: PLATFORM_HEIGHT,
+                                type: 'cyan',
+                                disappearTimer: null,
+                                questionIndex: null
+                            });
+                        }
+                    }
+                }
+
+                y -= (PLATFORM_GAP_MIN + Math.random() * (PLATFORM_GAP_MAX - PLATFORM_GAP_MIN));
+            }
+
+            // Сортировка: снизу вверх (меньший индекс — ниже)
+            platforms.sort((a, b) => b.y - a.y);
+
+            // Запрет: синяя платформа-пружина не может быть второй снизу при старте
+            if (platforms.length >= 2) {
+                const secondFromBottom = platforms[1];
+                if (secondFromBottom.type === 'blue') {
+                    secondFromBottom.type = 'cyan';
+                }
+            }
+
+            // Обеспечить количество зелёных платформ, равное количеству вопросов
+            let greens = platforms.filter(p => p.type === 'green');
+            const requiredGreens = questions.length;
+
+            while (greens.length < requiredGreens) {
+                let candidates = platforms.filter(p => p.type !== 'green' && p !== platforms[0]);
+                if (candidates.length === 0) break;
+                let randCand = candidates[Math.floor(Math.random() * candidates.length)];
+                randCand.type = 'green';
+                greens = platforms.filter(p => p.type === 'green');
+            }
+            while (greens.length > requiredGreens) {
+                let extraGreen = greens.pop();
+                extraGreen.type = ['cyan', 'blue', 'brown'][Math.floor(Math.random() * 3)];
+            }
+
+            // Самая верхняя платформа - зеленая
+            let topPlat = platforms[platforms.length - 1];
+
+            if (topPlat.type !== 'green') {
+                topPlat.type = 'green';
+                greens = platforms.filter(p => p.type === 'green');
+                if (greens.length > requiredGreens) {
+                    let extra = greens.filter(p => p !== topPlat)[Math.floor(Math.random() * (greens.length - 1))];
+                    extra.type = ['cyan', 'blue', 'brown'][Math.floor(Math.random() * 3)];
+                    extra.questionIndex = null;
+                }
+            }
+
+            // Назначить уникальные вопросы зелёным (один вопрос на одну зелёную платформу)
+            greens = platforms.filter(p => p.type === 'green');
+            for (let j = 0; j < greens.length && j < questionAssignments.length; j++) {
+                greens[j].questionIndex = questionAssignments[j];
+            }
+
+            // Установить topGreenPlatform
+            topGreenPlatform = platforms[platforms.length - 1];
+
+            // Стартовая позиция игрока: на земле в центре
+            player.x = canvas.width / 2;
+            player.y = ground.y - PLAYER_RADIUS;
+            player.vy = 0;
+            player.onGround = true;
+            currentPlatform = null;
+            cameraY = 0;
+        }
+
+        // Обработка клавиш
+        window.addEventListener('keydown', (e) => {
+            keys[e.key.toLowerCase()] = true;
+        });
+        window.addEventListener('keyup', (e) => {
+            keys[e.key.toLowerCase()] = false;
+        });
+
+        // Показ вопроса
+        function showQuestion(index) {
+            currentQuestionIndex = index;
+            const q = questions[currentQuestionIndex];
+            questionTextEl.textContent = q.text;
+            answersEl.innerHTML = '';
+            q.answers.forEach((answer, i) => {
+                if (answer) {
+                    const btn = document.createElement('button');
+                    btn.textContent = answer;
+                    btn.onclick = () => handleAnswer(i, btn);
+                    answersEl.appendChild(btn);
+                }
+            });
+            questionModal.style.display = 'block';
+            gameState.running = false;
+        }
+
+        // Обработка ответа
+        function handleAnswer(selected, clickedBtn) {
+            const q = questions[currentQuestionIndex];
+            const buttons = answersEl.querySelectorAll('button');
+
+            buttons.forEach((btn, i) => {
+                btn.disabled = true;
+                if (i === q.correct) {
+                    btn.style.background = '#4CAF50';
+                }
+            });
+            if (selected !== q.correct) {
+                clickedBtn.classList.add('wrong');
+                playFallSound();
+            }
+            setTimeout(() => {
+                questionModal.style.display = 'none';
+                gameState.running = true;
+                if (selected === q.correct) {
+                    // Сброс серии ошибок и, при необходимости, учёт правильного ответа
+                    wrongStreak = 0;
+                    // Учитываем только первый правильный ответ на каждый вопрос
+                    if (!answeredQuestions[currentQuestionIndex]) {
+                        answeredQuestions[currentQuestionIndex] = true;
+                        gameState.correctAnswers++;
+                        scoreEl.textContent = gameState.correctAnswers;
+                    }
+                    // Запоминаем платформу, на которой был верный ответ, и сбрасываем флаг перехода на другие платформы
+                    lastCorrectPlatform = currentPlatform;
+                    visitedOtherPlatformAfterCorrect = false;
+                    if (currentPlatform === topGreenPlatform) {
+                        gameState.running = false;
+                        // В финальном окне показываем количество верных ответов
+                        finalScoreEl.textContent = gameState.correctAnswers;
+                        winScreenEl.style.display = 'block';
+                    }
+                    // При правильном ответе персонаж остаётся на текущей платформе,
+                    // дальнейшее продвижение только за счёт прыжков
+                } else {
+                    // Увеличиваем серию ошибок и откатываемся на соответствующее число платформ,
+                    // начиная с 2 (первая ошибка -> 2 платформы вниз)
+                    wrongStreak++;
+                    const stepsDown = wrongStreak + 1;
+                    startAnimationToNextPlatform(false, stepsDown); // Неверно - вниз на N платформ
+                }
+            }, 1000);
+        }
+
+        // Запуск анимации
+        function startAnimationToNextPlatform(isCorrect, stepsDown = 1) {
+            let targetPlat = null;
+            animIsFall = false;
+            if (isCorrect) {
+                let minDiff = Infinity;
+                for (let plat of platforms) {
+                    if (plat.y < player.y && plat.disappearTimer === null) {
+                        let diff = player.y - plat.y;
+                        if (diff < minDiff) {
+                            minDiff = diff;
+                            targetPlat = plat;
+                        }
+                    }
+                }
+                animArcHeight = -50;
+            } else {
+                let lowerPlatforms = platforms.filter(plat => plat.y > player.y && plat.disappearTimer === null);
+                lowerPlatforms.sort((a, b) => a.y - b.y); // По возрастанию y (от ближе к дальше вниз)
+                if (lowerPlatforms.length > 0) {
+                    const index = Math.min(stepsDown - 1, lowerPlatforms.length - 1);
+                    targetPlat = lowerPlatforms[index]; // Откат на N-ю платформу вниз
+                }
+                animArcHeight = 50;
+            }
+
+            if (targetPlat) {
+                animating = true;
+                animProgress = 0;
+                animStartX = player.x;
+                animStartY = player.y;
+                animTargetX = targetPlat.x + targetPlat.width / 2;
+                animTargetY = targetPlat.y - PLAYER_RADIUS;
+                playJumpSound();
+            } else if (!isCorrect) {
+                // Анимация падения вниз без платформы
+                animating = true;
+                animProgress = 0;
+                animStartX = player.x;
+                animStartY = player.y;
+                animTargetX = player.x;
+                animTargetY = canvas.height + 50; // Падение за экран
+                animArcHeight = 50;
+                animIsFall = true;
+            }
+        }
+
+        // Обновление анимации
+        function updateAnimation() {
+            if (animating) {
+                animProgress++;
+                const t = animProgress / ANIM_DURATION;
+                if (t >= 1) {
+                    player.x = animTargetX;
+                    player.y = animTargetY;
+                    if (animIsFall) {
+                        player.vy = 5;
+                        player.onGround = false;
+                    } else {
+                        player.vy = 0;
+                        player.onGround = true;
+                    }
+                    animating = false;
+                    animIsFall = false;
+                    // Обновить currentPlatform если не падение
+                    if (!animIsFall) {
+                        for (let plat of platforms) {
+                            if (Math.abs(player.y + PLAYER_RADIUS - plat.y) < 5 && player.x > plat.x && player.x < plat.x + plat.width) {
+                                currentPlatform = plat;
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    player.x = animStartX + (animTargetX - animStartX) * t;
+                    player.y = animStartY + (animTargetY - animStartY) * t + Math.sin(t * Math.PI) * animArcHeight;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        // Рестарт
+        function restartGame() {
+            gameState = { running: true, correctAnswers: 0 };
+            generateFixedPlatforms();
+            gameOverEl.style.display = 'none';
+            winScreenEl.style.display = 'none';
+            scoreEl.textContent = '0';
+            answeredQuestions = {};
+            lastCorrectPlatform = null;
+            visitedOtherPlatformAfterCorrect = false;
+            shuffleBackgroundOrder();
+        }
+
+        // Проверка коллизии
+        function checkPlatformCollision(plat) {
+            if (player.vy >= 0 &&
+                player.x + PLAYER_RADIUS > plat.x &&
+                player.x - PLAYER_RADIUS < plat.x + plat.width &&
+                player.y + PLAYER_RADIUS >= plat.y &&
+                player.y + PLAYER_RADIUS < plat.y + plat.height + 5) {
+
+                player.y = plat.y - PLAYER_RADIUS;
+                player.vy = 0;
+                player.onGround = true;
+                currentPlatform = plat;
+
+                // Если после последнего верного ответа мы приземлились на другую платформу,
+                // отмечаем, что игрок уже ушёл с платформы с правильным ответом
+                if (lastCorrectPlatform && plat !== lastCorrectPlatform) {
+                    visitedOtherPlatformAfterCorrect = true;
+                }
+
+                if (plat.type === 'green') {
+                    const qIndex = plat.questionIndex;
+                    const alreadyCorrect = !!answeredQuestions[qIndex];
+
+                    if (!alreadyCorrect) {
+                        // Вопрос ещё ни разу не был решён верно
+                        showQuestion(qIndex);
+                    } else {
+                        // Вопрос уже был решён верно хотя бы один раз
+                        // Если это та же платформа и игрок ещё не побывал на другой платформе,
+                        // не задаём вопрос повторно (прыгает только на ней)
+                        if (plat === lastCorrectPlatform && !visitedOtherPlatformAfterCorrect) {
+                            // ничего не делаем
+                        } else {
+                            // Игрок уже побывал на другой платформе и вернулся — платформа "перезагрузилась",
+                            // снова задаём вопрос (очки второй раз не добавятся, т.к. answeredQuestions уже true)
+                            showQuestion(qIndex);
+                        }
+                    }
+                } else if (plat.type === 'blue') {
+                    player.vy = SPRING_JUMP;
+                    player.onGround = false;
+                    playJumpSound();
+                } else if (plat.type === 'brown' && plat.disappearTimer === null) {
+                    plat.disappearTimer = BROWN_DISAPPEAR_TIME;
+                } // cyan - ничего
+                return true;
+            }
+            return false;
+        }
+
+        // Отрисовка персонажа
+        function drawPlayer() {
+            ctx.save();
+            ctx.translate(player.x, player.y);
+
+            // Красный шар персонажа (база)
+            ctx.fillStyle = '#FF0000';
+            ctx.beginPath();
+            ctx.arc(0, 0, PLAYER_RADIUS, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#AA0000';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // Старый символ (серп и молот) как фон под спрайтом
+            ctx.strokeStyle = '#FFD700';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(-4, -2, 9, 0.2 * Math.PI, 1.4 * Math.PI);
+            ctx.stroke();
+            ctx.save();
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.lineWidth = 6;
+            ctx.beginPath();
+            ctx.arc(-1, -2, 7, 0.2 * Math.PI, 1.4 * Math.PI);
+            ctx.stroke();
+            ctx.restore();
+
+            ctx.strokeStyle = '#FFD700';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(4, -7);
+            ctx.lineTo(10, -1);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(2, -9);
+            ctx.lineTo(8, -9);
+            ctx.lineTo(8, -6);
+            ctx.lineTo(2, -6);
+            ctx.closePath();
+            ctx.stroke();
+
+            // Спрайт персонажа поверх круга
+            if (playerSpriteLoaded) {
+                const size = PLAYER_RADIUS * 2;
+                ctx.drawImage(playerSprite, -size / 2, -size / 2, size, size);
+            }
+
+            ctx.restore();
+        }
+
+        // Отрисовка платформы
+        function drawPlatform(plat) {
+
+            if (plat.disappearTimer !== null && plat.disappearTimer <= 0) return;
+            ctx.save();
+            ctx.translate(plat.x, plat.y);
+
+            let color;
+            switch (plat.type) {
+                case 'green': color = '#00FF00'; break;
+                case 'cyan': color = '#00FFFF'; break;
+                case 'blue': color = '#0000FF'; break;
+                case 'brown': color = '#8B4513'; break;
+            }
+            ctx.fillStyle = color;
+            ctx.fillRect(0, 0, plat.width, plat.height);
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(0, 0, plat.width, plat.height);
+
+            if (plat.type === 'brown' && plat.disappearTimer !== null) {
+                ctx.strokeStyle = '#FF0000';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(10, 5);
+                ctx.lineTo(20, 10);
+                ctx.moveTo(30, 2);
+                ctx.lineTo(40, 12);
+                ctx.stroke();
+            }
+
+            if (plat.type === 'blue') {
+                // Пружина: яркая белая спираль по центру и крупная стрелка вверх
+                ctx.strokeStyle = '#FFFFFF';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(plat.width / 2 - 15, 3);
+                ctx.lineTo(plat.width / 2 - 8, 0);
+                ctx.lineTo(plat.width / 2, 4);
+                ctx.lineTo(plat.width / 2 + 8, 0);
+                ctx.lineTo(plat.width / 2 + 15, 4);
+                ctx.stroke();
+
+                // Крупная стрелка вверх над центром платформы
+                ctx.beginPath();
+                const cx = plat.width / 2;
+                ctx.moveTo(cx, -2);
+                ctx.lineTo(cx, -14);
+                ctx.moveTo(cx - 6, -8);
+                ctx.lineTo(cx, -14);
+                ctx.lineTo(cx + 6, -8);
+                ctx.stroke();
+            } else if (plat.type === 'green') {
+
+                ctx.fillStyle = '#FFF';
+                ctx.font = 'bold 20px Arial';
+                ctx.textAlign = 'center';
+                // Немного выше относительно платформы
+                ctx.fillText('?', 40, 15);
+            }
+
+            ctx.restore();
+        }
+
+        // Игровой цикл
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (!gameState.running) {
+                requestAnimationFrame(gameLoop);
+                return;
+            }
+
+            // Фон позади сцены
+            drawBackground();
+
+            if (updateAnimation()) {
+                // Во время анимации не обрабатывать ввод и физику
+            } else {
+                // Управление
+                const speed = 5;
+                if (keys['a'] || keys['arrowleft']) player.vx = -speed;
+                else if (keys['d'] || keys['arrowright']) player.vx = speed;
+                else player.vx *= 0.8;
+
+                // Прыжок только вручную
+                if ((keys['w'] || keys['arrowup']) && player.onGround) {
+                    player.vy = JUMP_FORCE;
+                    player.onGround = false;
+                    playJumpSound();
+                }
+
+                // Границы по X
+                player.x = Math.max(PLAYER_RADIUS, Math.min(canvas.width - PLAYER_RADIUS, player.x));
+
+                // Физика
+                player.vy += GRAVITY;
+                player.y += player.vy;
+                player.x += player.vx;
+
+                // Коллизии
+                player.onGround = false;
+                for (let plat of platforms) {
+                    checkPlatformCollision(plat);
+                }
+
+                // Коллизия с землей (просто опора, без вопросов)
+                if (player.vy >= 0 &&
+                    player.y + PLAYER_RADIUS >= ground.y &&
+                    player.y + PLAYER_RADIUS <= ground.y + ground.height) {
+
+                    player.y = ground.y - PLAYER_RADIUS;
+                    player.vy = 0;
+                    player.onGround = true;
+                    currentPlatform = null;
+                }
+            }
+
+            // Камера: тянем сцену вверх за игроком
+            const targetCamY = player.y - canvas.height * 0.4;
+            if (targetCamY < cameraY) {
+                cameraY = targetCamY;
+            }
+
+            // Game over: игрок упал ниже экрана
+            if (player.y - cameraY > canvas.height + 50) {
+                gameState.running = false;
+                finalScoreEl.textContent = gameState.correctAnswers;
+                gameOverEl.style.display = 'block';
+            }
+
+            // Отрисовка с учётом смещения камеры
+            ctx.save();
+            ctx.translate(0, -cameraY);
+            drawGround();
+            platforms.forEach(drawPlatform);
+            drawPlayer();
+            ctx.restore();
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Старт
+        loadBackgroundImages();
+        generateFixedPlatforms();
+        gameLoop();
+    </script>
+</body>
+</html>
