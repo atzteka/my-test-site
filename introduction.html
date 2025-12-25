@@ -114,19 +114,6 @@
             margin-left: auto;
         }
         
-        .footnote {
-            font-size: 0.85rem;
-            color: #666;
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #eee;
-        }
-        
-        .footnote h4 {
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-        }
-        
         table {
             width: 100%;
             border-collapse: collapse;
@@ -162,6 +149,112 @@
             font-weight: bold;
             font-size: 0.9rem;
             margin-right: 0.5rem;
+        }
+        
+        /* Стили для сносок */
+        .footnote-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0 2px;
+        }
+        
+        .footnote-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Модальное окно для сносок */
+        .footnote-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .footnote-modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .modal-title {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin: 0;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .close-modal:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .modal-body {
+            line-height: 1.6;
+        }
+        
+        .modal-source-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+        
+        .modal-source-link:hover {
+            background: #9a0007;
+        }
+        
+        .modal-footer {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            font-size: 0.85rem;
+            color: #666;
         }
     </style>
 </head>
@@ -217,7 +310,7 @@
                 
                 <h3><i class="fas fa-gavel"></i> Официальное признание</h3>
                 
-                <p>Термин <strong>«коррупция» впервые появился в официальном документе СССР только в 1989 году</strong> в <strong>Постановлении Съезда народных депутатов СССР от 23 декабря 1989 года «Об усилении борьбы с организованной преступностью»</strong>.<sup><a href="#ref1">[1]</a></sup></p>
+                <p>Термин <strong>«коррупция» впервые появился в официальном документе СССР только в 1989 году</strong> в <strong>Постановлении Съезда народных депутатов СССР от 23 декабря 1989 года «Об усилении борьбы с организованной преступностью»</strong>.<sup><a class="footnote-link" data-footnote="1">[1]</a></sup></p>
                 
                 <p>В документе использовались формулировки:</p>
                 
@@ -230,7 +323,7 @@
                 
                 <h3><i class="fas fa-balance-scale-right"></i> Современное определение</h3>
                 
-                <p>Первое юридическое определение появилось только в <strong>Федеральном законе от 25 декабря 2008 года № 273-ФЗ «О противодействии коррупции»</strong>:<sup><a href="#ref2">[2]</a></sup></p>
+                <p>Первое юридическое определение появилось только в <strong>Федеральном законе от 25 декабря 2008 года № 273-ФЗ «О противодействии коррупции»</strong>:<sup><a class="footnote-link" data-footnote="2">[2]</a></sup></p>
                 
                 <div class="highlight-box">
                     <p><strong>Коррупция</strong> — это противоправное использование лицом своего служебного положения вопреки законным интересам общества и государства с целью получения имущественной или иной выгоды как для себя лично, так и в интересах третьих лиц, включая случаи, когда такое лицо не являлось должностным.</p>
@@ -245,12 +338,6 @@
                 </ol>
                 
                 <p><strong>Разница с 2008 годом</strong> в том, что в 1989 году термин упоминался впервые в официальном документе, но без закрепления как правового понятия — он не имел юридической силы, не определял состав преступления и не менял подход к преследованиям.</p>
-                
-                <div class="footnote">
-                    <h4><i class="fas fa-bookmark"></i> Примечания</h4>
-                    <p id="ref1">[1] Постановление Съезда народных депутатов СССР от 23 декабря 1989 года «Об усилении борьбы с организованной преступностью». С. 246-4 — 246-7. <a href="https://rusneb.ru/catalog/000202_000006_18eb9452-6bf7-4e35-a55f-c3cac401bd0a/" target="_blank">Источник</a></p>
-                    <p id="ref2">[2] Федеральный закон от 25 декабря 2008 года № 273-ФЗ «О противодействии коррупции». <a href="https://www.consultant.ru/document/cons_doc_LAW_82959/bbbd4641125b222beaf7483e16c594116ed2d9a1/" target="_blank">Источник</a></p>
-                </div>
             </div>
 
             <div class="navigation-buttons">
@@ -265,6 +352,22 @@
             </div>
         </div>
     </main>
+
+    <!-- Модальное окно для сносок -->
+    <div class="footnote-modal" id="footnoteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Примечание</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Содержимое будет заполняться JavaScript -->
+            </div>
+            <div class="modal-footer">
+                Нажмите на крестик или вне окна для закрытия
+            </div>
+        </div>
+    </div>
 
     <footer class="footer">
         <div class="container">
@@ -288,5 +391,71 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Данные для сносок
+        const footnotes = {
+            "1": {
+                title: "Постановление Съезда народных депутатов СССР от 23 декабря 1989 года",
+                content: "Постановление Съезда народных депутатов СССР от 23 декабря 1989 года «Об усилении борьбы с организованной преступностью». С. 246-4 — 246-7.",
+                link: "https://rusneb.ru/catalog/000202_000006_18eb9452-6bf7-4e35-a55f-c3cac401bd0a/",
+                linkText: "Открыть источник"
+            },
+            "2": {
+                title: "Федеральный закон от 25 декабря 2008 года № 273-ФЗ",
+                content: "Федеральный закон от 25 декабря 2008 года № 273-ФЗ «О противодействии коррупции».",
+                link: "https://www.consultant.ru/document/cons_doc_LAW_82959/bbbd4641125b222beaf7483e16c594116ed2d9a1/",
+                linkText: "Открыть закон"
+            }
+        };
+
+        // Получаем элементы
+        const footnoteModal = document.getElementById('footnoteModal');
+        const modalBody = document.getElementById('modalBody');
+        const closeModalBtn = document.getElementById('closeModal');
+        
+        // Добавляем обработчики для всех ссылок на сноски
+        document.querySelectorAll('.footnote-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const footnoteId = this.getAttribute('data-footnote');
+                
+                if (footnotes[footnoteId]) {
+                    const footnote = footnotes[footnoteId];
+                    
+                    // Заполняем содержимое модального окна
+                    modalBody.innerHTML = `
+                        <p><strong>${footnote.title}</strong></p>
+                        <p>${footnote.content}</p>
+                        ${footnote.link ? `<a href="${footnote.link}" target="_blank" class="modal-source-link">
+                            <i class="fas fa-external-link-alt"></i> ${footnote.linkText}
+                        </a>` : ''}
+                    `;
+                    
+                    // Показываем модальное окно
+                    footnoteModal.classList.add('active');
+                }
+            });
+        });
+        
+        // Закрытие модального окна
+        closeModalBtn.addEventListener('click', () => {
+            footnoteModal.classList.remove('active');
+        });
+        
+        // Закрытие при клике вне модального окна
+        footnoteModal.addEventListener('click', (e) => {
+            if (e.target === footnoteModal) {
+                footnoteModal.classList.remove('active');
+            }
+        });
+        
+        // Закрытие при нажатии ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && footnoteModal.classList.contains('active')) {
+                footnoteModal.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
