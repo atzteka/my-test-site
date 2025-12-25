@@ -275,6 +275,112 @@
             margin-top: 0;
             color: var(--primary-color);
         }
+        
+        /* Стили для сносок */
+        .footnote-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0 2px;
+        }
+        
+        .footnote-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Модальное окно для сносок */
+        .footnote-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .footnote-modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .modal-title {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin: 0;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .close-modal:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .modal-body {
+            line-height: 1.6;
+        }
+        
+        .modal-source-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+        
+        .modal-source-link:hover {
+            background: #9a0007;
+        }
+        
+        .modal-footer {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            font-size: 0.85rem;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -346,14 +452,14 @@
                             <tr>
                                 <td><strong>Временные правила о службе в государственных учреждениях и предприятиях</strong></td>
                                 <td>
-                                    <p><span class="year-badge">1922</span> Декрет СНК РСФСР от 21 декабря 1922 года запрещал госслужащим:<sup><a href="#ref4">[4]</a></sup></p>
+                                    <p><span class="year-badge">1922</span> Декрет СНК РСФСР от 21 декабря 1922 года запрещал госслужащим:<sup><a class="footnote-link" data-footnote="4">[4]</a></sup></p>
                                     <ul>
                                         <li>участвовать в частных предприятиях,</li>
                                         <li>вступать в коммерческие отношения с госструктурами,</li>
                                         <li>совмещать работу,</li>
                                         <li>быть акционерами частных компаний.</li>
                                     </ul>
-                                    <p>Нарушение влекло уголовную ответственность по ст. 114 УК РСФСР 1922 г.<sup><a href="#ref5">[5]</a></sup></p>
+                                    <p>Нарушение влекло уголовную ответственность по ст. 114 УК РСФСР 1922 г.<sup><a class="footnote-link" data-footnote="5">[5]</a></sup></p>
                                 </td>
                             </tr>
                             <tr>
@@ -409,12 +515,12 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><span class="year-badge">1917</span><br><strong>Декрет от 10 ноября 1917 г. «Об уничтожении сословий и гражданских чинов»</strong><sup><a href="#ref6">[6]</a></sup></td>
+                                <td><span class="year-badge">1917</span><br><strong>Декрет от 10 ноября 1917 г. «Об уничтожении сословий и гражданских чинов»</strong><sup><a class="footnote-link" data-footnote="6">[6]</a></sup></td>
                                 <td>Отменены сословия, чины, титулы и привилегии, разрушена система продажи должностей.</td>
                                 <td>Первый шаг по ликвидации исторических корней коррупции.</td>
                             </tr>
                             <tr>
-                                <td><span class="year-badge">1917</span><br><strong>Декрет от 14 ноября 1917 г. «О рабочем контроле»</strong><sup><a href="#ref7">[7]</a></sup></td>
+                                <td><span class="year-badge">1917</span><br><strong>Декрет от 14 ноября 1917 г. «О рабочем контроле»</strong><sup><a class="footnote-link" data-footnote="7">[7]</a></sup></td>
                                 <td>
                                     <p>Ст. 7: предприниматели обязаны открывать всю документацию перед рабочими, ликвидируется коммерческая тайна.</p>
                                     <p>Ст. 10: уголовная ответственность за сокрытие продукции, растраты, хищения, мошенничество. Конкретные санкции не указаны.</p>
@@ -422,32 +528,32 @@
                                 <td>Закладывает основу прозрачности и уголовной ответственности.</td>
                             </tr>
                             <tr>
-                                <td><span class="year-badge">1917</span><br><strong>Постановление НКЮ РСФСР от 19 декабря 1917 г. «О революционном трибунале»</strong><sup><a href="#ref8">[8]</a></sup></td>
+                                <td><span class="year-badge">1917</span><br><strong>Постановление НКЮ РСФСР от 19 декабря 1917 г. «О революционном трибунале»</strong><sup><a class="footnote-link" data-footnote="8">[8]</a></sup></td>
                                 <td>Уголовная ответственность за злоупотребление полномочиями, предоставленными «революционным народом». Наказания: лишение свободы, штрафы, объявление врагом народа, лишение прав, конфискация, принудительные работы.</td>
                                 <td>Расширение ответственности за бюрократизм и волокиту.</td>
                             </tr>
                             <tr>
-                                <td><span class="year-badge">1918</span><br><strong>Декрет СНК РСФСР от 8 мая 1918 г. «О взяточничестве»</strong><sup><a href="#ref9">[9]</a></sup></td>
+                                <td><span class="year-badge">1918</span><br><strong>Декрет СНК РСФСР от 8 мая 1918 г. «О взяточничестве»</strong><sup><a class="footnote-link" data-footnote="9">[9]</a></sup></td>
                                 <td>Минимум — 5 лет тюремного заключения + 5 лет принудительных работ. Все участники (взяткодатели, посредники и др.) — равная ответственность. При отягчающих — конфискация имущества и «неприятные» работы для «имущих классов».</td>
                                 <td>Впервые введен минимальный срок. Указан классовый подход.</td>
                             </tr>
                             <tr>
-                                <td><span class="year-badge">1921</span><br><strong>Декрет от 16 августа 1921 г. «О борьбе со взяточничеством»</strong><sup><a href="#ref10">[10]</a></sup></td>
+                                <td><span class="year-badge">1921</span><br><strong>Декрет от 16 августа 1921 г. «О борьбе со взяточничеством»</strong><sup><a class="footnote-link" data-footnote="10">[10]</a></sup></td>
                                 <td>Сохранены санкции 1918 г., но: взяткодатели освобождались при сотрудничестве; посредничество и укрывательство — самостоятельные преступления.</td>
                                 <td>Смягчение наказания для взяткодателей, расширение состава преступлений.</td>
                             </tr>
                             <tr>
-                                <td><span class="year-badge">1922</span><br><strong>Уголовный кодекс РСФСР 1922 г.</strong><sup><a href="#ref11">[11]</a></sup></td>
+                                <td><span class="year-badge">1922</span><br><strong>Уголовный кодекс РСФСР 1922 г.</strong><sup><a class="footnote-link" data-footnote="11">[11]</a></sup></td>
                                 <td>Ст. 114: до 5 лет лишения свободы за простое взяточничество; при отягчающих — от 3 лет до расстрела + конфискация. Посредники — до 2 лет. Ст. 115: провокация взятки — от 3 лет или расстрел.</td>
                                 <td>Создана дифференцированная система ответственности по критерию корысти и ущерба.</td>
                             </tr>
                             <tr>
-                                <td><span class="year-badge">1922</span><br><strong>Декрет ВЦИК и СНК. Об изменении текста ст. 114 Уголовного Кодекса от 9 декабря 1922 г.</strong><sup><a href="#ref12">[12]</a></sup></td>
+                                <td><span class="year-badge">1922</span><br><strong>Декрет ВЦИК и СНК. Об изменении текста ст. 114 Уголовного Кодекса от 9 декабря 1922 г.</strong><sup><a class="footnote-link" data-footnote="12">[12]</a></sup></td>
                                 <td>Изменение ст. 114 УК: минимум — 1 год лишения свободы (без права смягчения), добавлен квалифицирующий признак — нанесение ущерба государству.</td>
                                 <td>Ужесточение: введение обязательного минимума.</td>
                             </tr>
                             <tr>
-                                <td><span class="year-badge">1926</span><br><strong>Уголовный кодекс РСФСР 1926 г.</strong><sup><a href="#ref13">[13]</a></sup></td>
+                                <td><span class="year-badge">1926</span><br><strong>Уголовный кодекс РСФСР 1926 г.</strong><sup><a class="footnote-link" data-footnote="13">[13]</a></sup></td>
                                 <td>
                                     <p>Ст. 116 (растрата): до 3 лет (ранее — до 5); при отягчающих — от 2 лет + конфискация.</p>
                                     <p>Ст. 117 (получение взятки): до 2 лет; при отягчающих — от 2 лет + конфискация.</p>
@@ -459,7 +565,7 @@
                             <tr>
                                 <td><span class="year-badge">1940-е</span><br><strong>Военное время</strong></td>
                                 <td>
-                                    <p><strong>Закон СССР от 7 августа 1932 года «Об охране имущества государственных предприятий, колхозов и кооперации и управлении общественной (социалистической) собственности»</strong> (в народе — «закон о пяти колосках»)<sup><a href="#ref14">[14]</a></sup>: хищение соцсобственности — до расстрела или 10 лет.</p>
+                                    <p><strong>Закон СССР от 7 августа 1932 года «Об охране имущества государственных предприятий, колхозов и кооперации и управлении общественной (социалистической) собственности»</strong> (в народе — «закон о пяти колосках»)<sup><a class="footnote-link" data-footnote="14">[14]</a></sup>: хищение соцсобственности — до расстрела или 10 лет.</p>
                                     <p><strong>Постановление ГКО от 22 января 1943 года:</strong> расследование — в 10 дней, смертная казнь.</p>
                                     <p><strong>Указ от 23 июня 1942 года:</strong> хищение горючего — 3-5 лет.</p>
                                     <p><strong>Постановление от 11 июля 1942 года:</strong> ответственность за саботаж и спекуляцию — до 10 лет.</p>
@@ -467,7 +573,7 @@
                                 <td>Максимальное ужесточение в условиях войны.</td>
                             </tr>
                             <tr>
-                                <td><span class="year-badge">1960</span><br><strong>УК РСФСР 1960 г. + Указ от 20 февраля 1962 года</strong><sup><a href="#ref15">[15]</a></sup><sup><a href="#ref16">[16]</a></sup></td>
+                                <td><span class="year-badge">1960</span><br><strong>УК РСФСР 1960 г. + Указ от 20 февраля 1962 года</strong><sup><a class="footnote-link" data-footnote="15">[15]</a></sup><sup><a class="footnote-link" data-footnote="16">[16]</a></sup></td>
                                 <td>
                                     <p>Ст. 173: получение взятки — до 5 лет (основное), до 10 лет с конфискацией (отягчающие).</p>
                                     <p>Указ 1962 г.: введена ч. 3 — от 8 до 15 лет + ссылка, при особо отягчающих — смертная казнь.</p>
@@ -476,7 +582,7 @@
                                 <td>Взяточничество признано особо опасным преступлением.</td>
                             </tr>
                             <tr>
-                                <td><span class="year-badge">1986</span><br><strong>Указ от 23 мая 1986 года</strong><sup><a href="#ref17">[17]</a></sup></td>
+                                <td><span class="year-badge">1986</span><br><strong>Указ от 23 мая 1986 года</strong><sup><a class="footnote-link" data-footnote="17">[17]</a></sup></td>
                                 <td>
                                     <p>Ст. 173: базовое — до 10 лет; при отягчающих — 5-15 лет; при особо отягчающих — 8-15 лет + ссылка или смертная казнь.</p>
                                     <p>Ст. 174: дача — от 3 до 8 лет, при рецидиве — до 15 лет.</p>
@@ -537,7 +643,7 @@
                             </tr>
                             <tr>
                                 <td><strong>ГПУ</strong></td>
-                                <td>Унаследовал функции ВЧК, но с передачей дел в суд. Участие в операциях по выявлению взяточничества.</td>
+                                <td>Унаследовал функций ВЧК, но с передачей дел в суд. Участие в операциях по выявлению взяточничества.</td>
                                 <td>Постановление ВЦИК от 6 февраля 1922 г.</td>
                             </tr>
                             <tr>
@@ -588,7 +694,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Сатирический образ взяточника</strong></td>
-                                <td>Использование карикатур и плакатов.<sup><a href="#ref18">[18]</a></sup></td>
+                                <td>Использование карикатур и плакатов.<sup><a class="footnote-link" data-footnote="18">[18]</a></sup></td>
                             </tr>
                             <tr>
                                 <td><strong>Публикации случаев раскаяния</strong></td>
@@ -621,7 +727,7 @@
                             <tr>
                                 <td><strong>Смертная казнь</strong></td>
                                 <td>Специальные камеры, выездные сессии, минимум свидетелей, без защиты.</td>
-                                <td>Циркуляр НКЮ от 25.09.1922 №86 «О мерах по борьбе со взяточничеством»<sup><a href="#ref19">[19]</a></sup>.</td>
+                                <td>Циркуляр НКЮ от 25.09.1922 №86 «О мерах по борьбе со взяточничеством»<sup><a class="footnote-link" data-footnote="19">[19]</a></sup>.</td>
                             </tr>
                             <tr>
                                 <td><strong>Конфискация имущества</strong></td>
@@ -654,26 +760,6 @@
                     </ul>
                     <p>Таким образом, советский опыт демонстрирует, что даже при наличии формально строгой системы противодействия, коррупция может сохраняться, если она порождается системными особенностями политико-экономического устройства.</p>
                 </div>
-                
-                <div class="note-box" style="margin-top: 2rem;">
-                    <h4><i class="fas fa-bookmark"></i> Примечания и источники</h4>
-                    <p id="ref4">[4] Временные правила о службе в государственных учреждениях и предприятиях: <a href="https://docs.historyrussia.org/ru/nodes/371719" target="_blank">Три страницы из документа</a></p>
-                    <p id="ref5">[5] Ст. 114 УК РСФСР 1922 г.: <a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank">https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22</a></p>
-                    <p id="ref6">[6] Декрет от 10 ноября 1917 г.: <a href="https://istmat.org/node/27959" target="_blank">https://istmat.org/node/27959</a></p>
-                    <p id="ref7">[7] Декрет от 14 ноября 1917 г.: <a href="https://istmat.org/node/27971" target="_blank">https://istmat.org/node/27971</a></p>
-                    <p id="ref8">[8] Постановление от 19 декабря 1917 г.: <a href="https://istmat.org/node/28274" target="_blank">https://istmat.org/node/28274</a></p>
-                    <p id="ref9">[9] Декрет от 8 мая 1918 г.: <a href="https://istmat.org/node/29479" target="_blank">https://istmat.org/node/29479</a></p>
-                    <p id="ref10">[10] Декрет от 16 августа 1921 г.: <a href="https://istmat.org/node/46535" target="_blank">https://istmat.org/node/46535</a></p>
-                    <p id="ref11">[11] УК РСФСР 1922 г.: <a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22" target="_blank">https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22</a></p>
-                    <p id="ref12">[12] Декрет от 9 декабря 1922 г.: <a href="https://docs.historyrussia.org/ru/nodes/351608" target="_blank">https://docs.historyrussia.org/ru/nodes/351608</a></p>
-                    <p id="ref13">[13] УК РСФСР 1926 г.: <a href="https://docs.historyrussia.org/ru/nodes/391620" target="_blank">https://docs.historyrussia.org/ru/nodes/391620</a></p>
-                    <p id="ref14">[14] Закон от 7 августа 1932 года: <a href="https://kulturamgo.ru/kalendar-sobytij/den-v-istorii/17395-90-let-nazad-vyshel-zakon-o-trjokh-koloskakh-odno-iz-spornykh-reshenij-vlasti-2" target="_blank">Две страницы закона</a></p>
-                    <p id="ref15">[15] УК РСФСР 1960 г.: <a href="https://nnov.hse.ru/ba/law/igpr/sov_gos/14_ugol_kodeks" target="_blank">https://nnov.hse.ru/ba/law/igpr/sov_gos/14_ugol_kodeks</a></p>
-                    <p id="ref16">[16] Указ от 20 февраля 1962 года: <a href="https://www.consultant.ru/cons/cgi/online.cgi?req=doc&base=ESU&n=26817#0xF626V9ZssgSLk2" target="_blank">https://www.consultant.ru/cons/cgi/online.cgi?req=doc&base=ESU&n=26817</a></p>
-                    <p id="ref17">[17] Указ от 23 мая 1986 года: <a href="https://docs.cntd.ru/document/9006455" target="_blank">https://docs.cntd.ru/document/9006455</a></p>
-                    <p id="ref18">[18] Карикатуры: Из документа с игрой, страницы карикатур</p>
-                    <p id="ref19">[19] Циркуляр НКЮ от 25.09.1922 №86 предписывал: создание специальных судебных камер с заседателями и «ударного списка» - партийных работников, обеспечивающих лояльность и строгость решений; проведение выездных судебных сессий для ускорения рассмотрения дел; применение сокращенного судопроизводства по статьям 107, 40 Уголовно-процессуального кодекса РСФСР 1922 года.</p>
-                </div>
             </div>
 
             <div class="navigation-buttons">
@@ -688,6 +774,22 @@
             </div>
         </div>
     </main>
+
+    <!-- Модальное окно для сносок -->
+    <div class="footnote-modal" id="footnoteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Примечание</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Содержимое будет заполняться JavaScript -->
+            </div>
+            <div class="modal-footer">
+                Нажмите на крестик или вне окна для закрытия
+            </div>
+        </div>
+    </div>
 
     <footer class="footer">
         <div class="container">
@@ -711,7 +813,158 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Данные для сносок
+        const footnotes = {
+            "4": {
+                title: "Временные правила о службе в государственных учреждениях и предприятиях",
+                content: "Временные правила о службе в государственных учреждениях и предприятиях: Три страницы из документа",
+                link: "https://docs.historyrussia.org/ru/nodes/371719",
+                linkText: "Открыть документ"
+            },
+            "5": {
+                title: "Ст. 114 УК РСФСР 1922 г.",
+                content: "Статья 114 Уголовного кодекса РСФСР 1922 года о взяточничестве",
+                link: "https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22",
+                linkText: "Открыть УК РСФСР 1922 г."
+            },
+            "6": {
+                title: "Декрет от 10 ноября 1917 г.",
+                content: "Декрет от 10 ноября 1917 года «Об уничтожении сословий и гражданских чинов»",
+                link: "https://istmat.org/node/27959",
+                linkText: "Открыть документ"
+            },
+            "7": {
+                title: "Декрет от 14 ноября 1917 г.",
+                content: "Декрет от 14 ноября 1917 года «О рабочем контроле»",
+                link: "https://istmat.org/node/27971",
+                linkText: "Открыть документ"
+            },
+            "8": {
+                title: "Постановление от 19 декабря 1917 г.",
+                content: "Постановление НКЮ РСФСР от 19 декабря 1917 г. «О революционном трибунале»",
+                link: "https://istmat.org/node/28274",
+                linkText: "Открыть документ"
+            },
+            "9": {
+                title: "Декрет от 8 мая 1918 г.",
+                content: "Декрет СНК РСФСР от 8 мая 1918 г. «О взяточничестве»",
+                link: "https://istmat.org/node/29479",
+                linkText: "Открыть документ"
+            },
+            "10": {
+                title: "Декрет от 16 августа 1921 г.",
+                content: "Декрет от 16 августа 1921 г. «О борьбе со взяточничеством»",
+                link: "https://istmat.org/node/46535",
+                linkText: "Открыть документ"
+            },
+            "11": {
+                title: "УК РСФСР 1922 г.",
+                content: "Уголовный кодекс РСФСР 1922 года",
+                link: "https://nnov.hse.ru/ba/law/igpr/sov_gos/ugkod_22",
+                linkText: "Открыть УК РСФСР 1922 г."
+            },
+            "12": {
+                title: "Декрет от 9 декабря 1922 г.",
+                content: "Декрет ВЦИК и СНК об изменении текста ст. 114 Уголовного Кодекса от 9 декабря 1922 г.",
+                link: "https://docs.historyrussia.org/ru/nodes/351608",
+                linkText: "Открыть документ"
+            },
+            "13": {
+                title: "УК РСФСР 1926 г.",
+                content: "Уголовный кодекс РСФСР 1926 года",
+                link: "https://docs.historyrussia.org/ru/nodes/391620",
+                linkText: "Открыть УК РСФСР 1926 г."
+            },
+            "14": {
+                title: "Закон от 7 августа 1932 года",
+                content: "Закон СССР от 7 августа 1932 года «Об охране имущества государственных предприятий, колхозов и кооперации и управлении общественной (социалистической) собственности»",
+                link: "https://kulturamgo.ru/kalendar-sobytij/den-v-istorii/17395-90-let-nazad-vyshel-zakon-o-trjokh-koloskakh-odno-iz-spornykh-reshenij-vlasti-2",
+                linkText: "Открыть закон"
+            },
+            "15": {
+                title: "УК РСФСР 1960 г.",
+                content: "Уголовный кодекс РСФСР 1960 года",
+                link: "https://nnov.hse.ru/ba/law/igpr/sov_gos/14_ugol_kodeks",
+                linkText: "Открыть УК РСФСР 1960 г."
+            },
+            "16": {
+                title: "Указ от 20 февраля 1962 года",
+                content: "Указ Президиума Верховного Совета СССР от 20 февраля 1962 года об усилении ответственности за взяточничество",
+                link: "https://www.consultant.ru/cons/cgi/online.cgi?req=doc&base=ESU&n=26817",
+                linkText: "Открыть указ"
+            },
+            "17": {
+                title: "Указ от 23 мая 1986 года",
+                content: "Указ Президиума Верховного Совета СССР от 23 мая 1986 года об усилении борьбы с извлечением нетрудовых доходов",
+                link: "https://docs.cntd.ru/document/9006455",
+                linkText: "Открыть указ"
+            },
+            "18": {
+                title: "Карикатуры и плакаты",
+                content: "Карикатуры и плакаты как форма пропаганды против взяточничества в СССР",
+                link: null,
+                linkText: ""
+            },
+            "19": {
+                title: "Циркуляр НКЮ от 25.09.1922 №86",
+                content: "Циркуляр НКЮ от 25.09.1922 №86 предписывал: создание специальных судебных камер с заседателями и «ударного списка» - партийных работников, обеспечивающих лояльность и строгость решений; проведение выездных судебных сессий для ускорения рассмотрения дел; применение сокращенного судопроизводства по статьям 107, 40 Уголовно-процессуального кодекса РСФСР 1922 года.",
+                link: null,
+                linkText: ""
+            }
+        };
+
+        // Получаем элементы
+        const footnoteModal = document.getElementById('footnoteModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const closeModalBtn = document.getElementById('closeModal');
+        
+        // Добавляем обработчики для всех ссылок на сноски
+        document.querySelectorAll('.footnote-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const footnoteId = this.getAttribute('data-footnote');
+                
+                if (footnotes[footnoteId]) {
+                    const footnote = footnotes[footnoteId];
+                    
+                    // Заполняем заголовок и содержимое модального окна
+                    modalTitle.textContent = `Примечание [${footnoteId}]`;
+                    
+                    // Показываем только содержание
+                    modalBody.innerHTML = `
+                        <p>${footnote.content}</p>
+                        ${footnote.link ? `<a href="${footnote.link}" target="_blank" class="modal-source-link">
+                            <i class="fas fa-external-link-alt"></i> ${footnote.linkText}
+                        </a>` : ''}
+                    `;
+                    
+                    // Показываем модальное окно
+                    footnoteModal.classList.add('active');
+                }
+            });
+        });
+        
+        // Закрытие модального окна
+        closeModalBtn.addEventListener('click', () => {
+            footnoteModal.classList.remove('active');
+        });
+        
+        // Закрытие при клике вне модального окна
+        footnoteModal.addEventListener('click', (e) => {
+            if (e.target === footnoteModal) {
+                footnoteModal.classList.remove('active');
+            }
+        });
+        
+        // Закрытие при нажатии ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && footnoteModal.classList.contains('active')) {
+                footnoteModal.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
-
-
