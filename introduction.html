@@ -357,7 +357,7 @@
     <div class="footnote-modal" id="footnoteModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Примечание</h3>
+                <h3 class="modal-title" id="modalTitle">Примечание</h3>
                 <button class="close-modal" id="closeModal">&times;</button>
             </div>
             <div class="modal-body" id="modalBody">
@@ -396,13 +396,13 @@
         // Данные для сносок
         const footnotes = {
             "1": {
-                title: "Постановление Съезда народных депутатов СССР от 23 декабря 1989 года",
+                title: "Постановление Съезда народных депутатов СССР",
                 content: "Постановление Съезда народных депутатов СССР от 23 декабря 1989 года «Об усилении борьбы с организованной преступностью». С. 246-4 — 246-7.",
                 link: "https://rusneb.ru/catalog/000202_000006_18eb9452-6bf7-4e35-a55f-c3cac401bd0a/",
                 linkText: "Открыть источник"
             },
             "2": {
-                title: "Федеральный закон от 25 декабря 2008 года № 273-ФЗ",
+                title: "Федеральный закон № 273-ФЗ",
                 content: "Федеральный закон от 25 декабря 2008 года № 273-ФЗ «О противодействии коррупции».",
                 link: "https://www.consultant.ru/document/cons_doc_LAW_82959/bbbd4641125b222beaf7483e16c594116ed2d9a1/",
                 linkText: "Открыть закон"
@@ -411,6 +411,7 @@
 
         // Получаем элементы
         const footnoteModal = document.getElementById('footnoteModal');
+        const modalTitle = document.getElementById('modalTitle');
         const modalBody = document.getElementById('modalBody');
         const closeModalBtn = document.getElementById('closeModal');
         
@@ -423,9 +424,11 @@
                 if (footnotes[footnoteId]) {
                     const footnote = footnotes[footnoteId];
                     
-                    // Заполняем содержимое модального окна
+                    // Заполняем заголовок и содержимое модального окна
+                    modalTitle.textContent = `Примечание [${footnoteId}]`;
+                    
+                    // Теперь показываем только содержание, без повторения заголовка
                     modalBody.innerHTML = `
-                        <p><strong>${footnote.title}</strong></p>
                         <p>${footnote.content}</p>
                         ${footnote.link ? `<a href="${footnote.link}" target="_blank" class="modal-source-link">
                             <i class="fas fa-external-link-alt"></i> ${footnote.linkText}
