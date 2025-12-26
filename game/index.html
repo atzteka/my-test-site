@@ -80,6 +80,28 @@
         #questionModal button.wrong {
             background: #f44336 !important;
         }
+        #touchControls {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+        #touchControls button {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+        }
+        #touchControls button:active {
+            background: rgba(0,0,0,0.8);
+        }
     </style>
 </head>
 <body>
@@ -102,6 +124,12 @@
         <div id="answers"></div>
     </div>
 
+    <div id="touchControls">
+        <button id="btnLeft">◀</button>
+        <button id="btnJump">▲</button>
+        <button id="btnRight">▶</button>
+    </div>
+
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
@@ -112,6 +140,9 @@
         const questionModal = document.getElementById('questionModal');
         const questionTextEl = document.getElementById('questionText');
         const answersEl = document.getElementById('answers');
+        const btnLeft = document.getElementById('btnLeft');
+        const btnRight = document.getElementById('btnRight');
+        const btnJump = document.getElementById('btnJump');
 
         // Логический размер игры (совпадает с атрибутами width/height канваса)
         const LOGICAL_WIDTH = 500;
@@ -668,6 +699,45 @@
         window.addEventListener('keyup', (e) => {
             keys[e.key.toLowerCase()] = false;
         });
+
+        function bindTouchButton(btn, keyName) {
+            if (!btn) return;
+
+            const setKey = (value) => {
+                keys[keyName.toLowerCase()] = value;
+            };
+
+            btn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                setKey(true);
+            });
+            btn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                setKey(false);
+            });
+            btn.addEventListener('touchcancel', (e) => {
+                e.preventDefault();
+                setKey(false);
+            });
+
+            btn.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                setKey(true);
+            });
+            btn.addEventListener('mouseup', (e) => {
+                e.preventDefault();
+                setKey(false);
+            });
+            btn.addEventListener('mouseleave', (e) => {
+                e.preventDefault();
+                setKey(false);
+            });
+        }
+
+        // Привязка сенсорных кнопок к тем же "клавишам", что и на клавиатуре
+        bindTouchButton(btnLeft, 'arrowleft');
+        bindTouchButton(btnRight, 'arrowright');
+        bindTouchButton(btnJump, 'arrowup');
 
         // Показ вопроса
         function showQuestion(index) {
