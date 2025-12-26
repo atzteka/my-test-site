@@ -14,8 +14,11 @@
             min-height: 100vh;
             background: linear-gradient(to bottom, #87CEEB, #98FB98);
             font-family: Arial, sans-serif;
-            overflow: hidden;
+            /* Разрешаем прокрутку страницы на мобильных, чтобы было видно нижнюю часть */
+            overflow-x: hidden;
+            overflow-y: auto;
         }
+
         canvas {
             border: 2px solid #333;
             background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 50%, #98FB98 100%);
@@ -55,6 +58,9 @@
             display: none;
             max-width: 300px; /* Меньше размер для видимости фона */
             font-size: 16px;
+            /* Ограничиваем высоту и включаем прокрутку, чтобы длинный текст и все ответы помещались на экране */
+            max-height: 80vh;
+            overflow-y: auto;
         }
         #questionModal button {
             display: block;
@@ -478,6 +484,15 @@
             setTimeout(() => oscillator.stop(), 500);
         }
 
+        function playCorrectSound() {
+            let oscillator = audioCtx.createOscillator();
+            oscillator.type = 'triangle';
+            oscillator.frequency.setValueAtTime(660, audioCtx.currentTime);
+            oscillator.connect(audioCtx.destination);
+            oscillator.start();
+            setTimeout(() => oscillator.stop(), 150);
+        }
+
         // Игровое состояние
         let gameState = {
             running: true,
@@ -686,7 +701,10 @@
             if (selected !== q.correct) {
                 clickedBtn.classList.add('wrong');
                 playFallSound();
+            } else {
+                playCorrectSound();
             }
+
             setTimeout(() => {
                 questionModal.style.display = 'none';
                 gameState.running = true;
